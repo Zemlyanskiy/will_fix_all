@@ -15,7 +15,7 @@
 ### Structure can be updated in future
 
 ### Roles
--
--
+- @ivankochin - Infrastructure and Testing
+- @Zemlyanskiy - Frontend and little bit Backend
 -
 -
