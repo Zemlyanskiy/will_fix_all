@@ -17,5 +17,5 @@
 ### Roles
 - @ivankochin - Infrastructure and Testing
 - @Zemlyanskiy - Frontend and little bit Backend
--
--
+- @Iv-Umlore - Backend
+- @MaksimenkoAN - Documentation
