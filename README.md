@@ -21,3 +21,6 @@
 - @Zemlyanskiy - Frontend and little bit Backend
 - @Iv-Umlore - Backend
 - @MaksimenkoAN - Documentation
+
+
+End string
