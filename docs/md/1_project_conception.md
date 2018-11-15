@@ -180,15 +180,15 @@
 -->
 ##### Обычный пользователь:
 
-![Client](images/Client.png)
+![Client](images/Client.PNG)
 
 ##### Менеджер:
 
-![Manager](images/Manager.png)
+![Manager](images/Manager.PNG)
 
 ##### Администратор:
 
-![Admin](images/Admin.png)
+![Admin](images/Admin.PNG)
 
 ### 2.4.	Требования
 <!--
