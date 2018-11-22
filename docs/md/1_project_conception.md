@@ -667,6 +667,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Import changes in design strategy
 =======
  
@@ -689,13 +690,20 @@ ID
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
 >>>>>>> Import changes in design strategy
 =======
  
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
 >>>>>>> Import changes in design strategy
+=======
+ 
+>>>>>>> Update 1_project_conception.md
 Архитектура разрабатываемой системы будет состоять из трех крупных взаимодействующих компонент.
 1. __Интерфейс (front-end)__ - предоставляет пользователю взаимодействие с программной системой посредством визуальных окон Windows. Взаимодействие с базой данных будет реализована при помощи связки процедур СУБД с клиентской частью.
 2. __Серверная часть (back-end)__  - реализует бизнес-логику работы с данными, взаимодействует с базой данных посредством SQL запросов и Object Relational Mapping (ORM), хранит в себе историю работы.
