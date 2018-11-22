@@ -13,10 +13,16 @@
     <h3 align="center">Кафедра Программной инженерии</h3>
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
     <h3 align="center">Факультет Вычислительной математики и кибернетики Кафедра Математического обеспечения ЭВМ </h3>
 <<<<<<< HEAD
 >>>>>>> Import changes in design strategy
 =======
+=======
+>>>>>>> Import changes in design strategy
+=======
+    <h3 align="center">Факультет Вычислительной математики и кибернетики Кафедра Математического обеспечения ЭВМ </h3>
+>>>>>>> Import changes in design strategy
 =======
 >>>>>>> Import changes in design strategy
 
@@ -660,6 +666,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Import changes in design strategy
 =======
  
@@ -680,10 +687,15 @@ ID
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> Import changes in design strategy
 >>>>>>> Import changes in design strategy
 =======
  
 >>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> Import changes in design strategy
+>>>>>>> Import changes in design strategy
 Архитектура разрабатываемой системы будет состоять из трех крупных взаимодействующих компонент.
 1. __Интерфейс (front-end)__ - предоставляет пользователю взаимодействие с программной системой посредством визуальных окон Windows. Взаимодействие с базой данных будет реализована при помощи связки процедур СУБД с клиентской частью.
 2. __Серверная часть (back-end)__  - реализует бизнес-логику работы с данными, взаимодействует с базой данных посредством SQL запросов и Object Relational Mapping (ORM), хранит в себе историю работы.
@@ -695,12 +707,17 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+=======
+>>>>>>> Import changes in design strategy
+>>>>>>> Import changes in design strategy
 ### 4.2. Стратегия технологического дизайна
 =======
 ### 4.2.	Стратегия технологического дизайна
@@ -708,11 +725,15 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Import changes in design strategy
 =======
 ### 4.2. Стратегия технологического дизайна
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Import changes in design strategy
+<<<<<<< HEAD
 =======
 =======
 ### 4.2. Стратегия технологического дизайна
@@ -732,6 +753,8 @@ ID
 ### 4.2. Стратегия технологического дизайна
 >>>>>>> Update 1_project_conception.md
 >>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> Import changes in design strategy
 <!--
 Разработка решения потребует использования определенных продуктов и технологий. Стратегия технологического дизайна (technical design strategy) описывает, какие технологии и продукты выбраны проектной группой в качестве средства реализации решения.
 Аргументировано опишите, какие технологические средства будут использованы в процессе работы над решением.
@@ -744,6 +767,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -754,6 +778,10 @@ ID
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+=======
+>>>>>>> Import changes in design strategy
+>>>>>>> Import changes in design strategy
 1. __Интерфейс (front-end):__
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений на языке __Java__ (фреймворк для создания графического интерфейса __JavaFX__).
 2. __Серверная часть (back-end):__
@@ -772,10 +800,13 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> Import changes in design strategy
 =======
 1. __Интерфейс (front-end):__
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений под Windows: визуальных форм __WinForms__ и языка программирования __.Net C#__.
@@ -783,6 +814,7 @@ ID
 >>>>>>> Update 1_project_conception.md
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -791,6 +823,10 @@ ID
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+=======
+>>>>>>> Import changes in design strategy
+>>>>>>> Import changes in design strategy
 - Серверная часть приложения также будет реализована при помощи языка программирования __.Net C#__.
 При помощи инструментов  __.Net C#__ можно обеспечить связь с базой данных и реализовать логику взаимодействия с данными.			
 3. __База данных (database):__  
