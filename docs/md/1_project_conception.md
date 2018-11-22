@@ -688,14 +688,18 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Update 1_project_conception.md
 ### 4.2. Стратегия технологического дизайна
 =======
 ### 4.2.	Стратегия технологического дизайна
 >>>>>>> Import changes in design strategy
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -717,6 +721,11 @@ ID
 ### 4.2.	Стратегия технологического дизайна
 >>>>>>> Import changes in design strategy
 >>>>>>> Import changes in design strategy
+=======
+=======
+### 4.2. Стратегия технологического дизайна
+>>>>>>> Update 1_project_conception.md
+>>>>>>> Update 1_project_conception.md
 <!--
 Разработка решения потребует использования определенных продуктов и технологий. Стратегия технологического дизайна (technical design strategy) описывает, какие технологии и продукты выбраны проектной группой в качестве средства реализации решения.
 Аргументировано опишите, какие технологические средства будут использованы в процессе работы над решением.
@@ -728,6 +737,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -736,6 +746,8 @@ ID
 >>>>>>> Resolve conflicts with team reviewing
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
 1. __Интерфейс (front-end):__
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений на языке __Java__ (фреймворк для создания графического интерфейса __JavaFX__).
 2. __Серверная часть (back-end):__
@@ -753,6 +765,9 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Update 1_project_conception.md
 =======
@@ -761,12 +776,15 @@ ID
 2. __Серверная часть (back-end):__
 >>>>>>> Update 1_project_conception.md
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
 - Серверная часть приложения также будет реализована при помощи языка программирования __.Net C#__.
 При помощи инструментов  __.Net C#__ можно обеспечить связь с базой данных и реализовать логику взаимодействия с данными.			
 3. __База данных (database):__  
