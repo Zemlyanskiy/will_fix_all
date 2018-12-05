@@ -1,4 +1,4 @@
-# Will Fix ALl
+# Will Fix All
 ## Repository for semester laboratory work
 
 ### Contribution Rules
