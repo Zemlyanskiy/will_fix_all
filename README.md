@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ivankochin/will_fix_all.svg?branch=master)](https://travis-ci.org/ivankochin/will_fix_all)
+
 # Will Fix All
 ## Repository for semester laboratory work
 
@@ -7,18 +9,15 @@ If you are want to commit some changes - please __do it via pull request from yo
 3 Aproval Reviews is needed for merging pull request to __master branch__
 
 ### Sructure
-- backend - API functional
-- - src - source files
-- - bin - binary compiled API
-- - tests - testing sources
-- frontend - Graphical User Interface folder
-- - src - source files
-- - bin - binary compiled API
-- - tests - testing sources
+- src - API functional
+  - backend - Backend functionality
+  - frontend - Graphical User Interface folder
+- out - Directory for Binaries output
+- tests - Testing sources
 - docs - Documentation
 - - word - templates in *doc* format
 - - md - documentation in markdown
-- sandbox - *sandbox* (pesochnitsa)
+- sandbox - *sandbox* (pesochnitsa) (optional)
 
 ### Structure can be updated in future
 
