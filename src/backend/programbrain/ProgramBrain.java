@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package programbrain;
+package backend.programbrain;
+import backend.Client.*;
+import backend.Server.*;
+
+import java.io.IOException;
 
 /**
  *
@@ -16,6 +20,12 @@ public class ProgramBrain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("I am Alive");
+
+        Server server = new Server();
+        server.GiveAllClient();
+        server.GiveAllUsers();
+
     }
     
 }

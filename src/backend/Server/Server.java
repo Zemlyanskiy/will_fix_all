@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package backend.Server;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 public class Server implements ServerInterface{
 
-    Server(){};
+    public Server(){};
     
     @Override
     public void GiveCalendar() {
