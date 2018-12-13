@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backend.Server;
+package server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -38,7 +38,7 @@ public class ServerSpeaker extends Thread {
                           
             switch (command) {
                 case "GiveCalendar": { 
-                    /*_dos.write()*/ServInt.GiveCalendar(); // скорее всего give calendar
+                    /*_dos.write()*/ServInt.SendCalendar();// скорее всего give calendar
                     // _dos.flush
                     break;
                 }
@@ -129,20 +129,19 @@ public class ServerSpeaker extends Thread {
         }
     }
 }
-/* 
-    
-   
+/*
+
+
     // OTHER FUNCTION
     // User
-    
-   
-    
-    // AdminInterface
-        
-    void ChangeManager(int id_rec, int id_manager);
-        
-    void SetManager(int id_user);
-    
-    void RemoveManager(int id_user);
-*/
 
+
+
+    // AdminInterface
+
+    void ChangeManager(int id_rec, int id_manager);
+
+    void SetManager(int id_user);
+
+    void RemoveManager(int id_user);
+ */

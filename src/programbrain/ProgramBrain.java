@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backend.programbrain;
-import backend.Client.*;
-import backend.Server.*;
+package programbrain;
+import server.*;
+import client.*;
 
 import java.io.IOException;
 
@@ -19,13 +19,7 @@ public class ProgramBrain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("I am Alive");
-
         Server server = new Server();
-        server.GiveAllClient();
-        server.GiveAllUsers();
-
     }
     
 }

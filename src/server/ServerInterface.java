@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backend.Server;
+package server;
 
 import java.time.LocalDateTime;
 
@@ -22,8 +22,9 @@ public interface ServerInterface {
          
     // SENDERS ! ! ! 
     
-    void/*Все записи со временем*/ GiveCalendar();    
+    void/*Все записи со временем*/ SendCalendar();  
     // Отправить текущую версию календаря(актуальную)
+    
     
     void/*запись*/ GiveCar(int id_rec);          
     // Отправить информацию о своей машине
@@ -38,6 +39,12 @@ public interface ServerInterface {
     // Отослать список всех клиентов админу
     
     void/*список*/ GiveAllUsers();
+    //    String[] OpenChat(root user);   
+    // Открыть чат( от имени какого пользователя мы открываем,
+    // позволит менеджеру открывать чат от имени клиента и менеджера.
+    // Боюсь, что это будет не так весело
+         
+    // SENDERS ! ! ! 
     // Послать список зарегистрированных пользователей админу
     
     // OTHER FUNCTION
@@ -49,7 +56,7 @@ public interface ServerInterface {
     int CheckLogPass(String Login, String pass);
     // Авторизация
          
-    void ToBookATime(int id_rec, /*LocalDateTime*/ int time);         
+    void ToBookATime(int id_rec, /*LocalDateTime*/ int time); 
 // забронировать время
     
     // Manager   

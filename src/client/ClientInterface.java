@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backend.Client;
+package client;
 
 import java.time.LocalDateTime;
 
@@ -38,7 +38,7 @@ public interface ClientInterface {
 // Открыть чат( от имени какого пользователя мы открываем,
 // позволит менеджеру открывать чат от имени клиента и менеджера.
     
-    void ToBookATime(LocalDateTime time);         // забронировать время
+    void ToBookATime(int time);         // забронировать время
     
     // ManagerInterface
     // У нас не будет этих кнопок у пользователя, мы их просто спрячем))
@@ -50,13 +50,14 @@ public interface ClientInterface {
     void ChangeStatus(int id_rec, String status);
     // сменить статус заказа на status
     
-    void ChangeTime(LocalDateTime time, int id_rec);
+    void ChangeTime(int time, int id_rec);
     // Изменить время заказа на time. Time с помощью интерфейса определяется.
     
     // AdminInterface
     // Аналогично так же поступим, как и клиент-менеджер.
     // Просто. Прячем. Кнопки...\
-    
+    Object/*список*/ GetAllClient();
+    // Выдать список всех клиентов
     
     void ChangeManager(int id_rec, int id_manager);
     // Сменить менеджера записи rec, на другого.

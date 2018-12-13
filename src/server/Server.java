@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package backend.Server;
+package server;
 
 import java.time.LocalDateTime;
 
@@ -16,11 +16,11 @@ public class Server implements ServerInterface{
     public Server(){};
     
     @Override
-    public void GiveCalendar() {
+    public void SendCalendar() {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("I do it 1");
     }
-
+        
     @Override
     public void GiveCar(int id_rec) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -46,7 +46,7 @@ public class Server implements ServerInterface{
     }
 
     @Override
-    public void GiveAllUsers() {
+    public void GiveAllUsers() { 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("I do it 6");
     }
@@ -100,6 +100,5 @@ public class Server implements ServerInterface{
     public void RemoveManager(int id_user) {
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("I do it 14");   
-    }
-    
+    }  
 }
