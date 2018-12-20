@@ -21,5 +21,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-5.1.42" level="project" />
+    <orderEntry type="library" name="postgresql-42.2.5" level="project" />
   </component>
 </module>
