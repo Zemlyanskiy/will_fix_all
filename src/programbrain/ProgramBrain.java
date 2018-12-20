@@ -22,9 +22,9 @@ public class ProgramBrain {
      * @param args the command line arguments
      */
     //  Database credentials
-    static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/vertex";
-    static final String USER = "username";
-    static final String PASS = "password";
+    static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/will_fix_all";
+    static final String USER = "postgres";
+    static final String PASS = "0000";
 
     public static void main(String[] argv) {
 
@@ -57,5 +57,5 @@ public class ProgramBrain {
             System.out.println("Failed to make connection to database");
         }
     }
-    
+
 }
