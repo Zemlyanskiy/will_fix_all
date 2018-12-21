@@ -1,7 +1,4 @@
 package programbrain;
-import org.postgresql.jdbc2.optional.ConnectionPool;
-
-import java.sql.*;
 import java.io.PrintWriter;
 
 import static java.lang.System.out;
