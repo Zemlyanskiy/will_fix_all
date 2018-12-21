@@ -16,6 +16,7 @@ public class Procedure implements ProcedureInterface {
     @Override
     public void ReadChat(int userId, PrintWriter refCursor) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
         /*Connection con = null;
@@ -59,6 +60,9 @@ public class Procedure implements ProcedureInterface {
             }
         }*/
 >>>>>>> Connect success, add interface to override procedures
+=======
+        
+>>>>>>> Resolve conflicts with team reviewing
     }
 
     @Override
