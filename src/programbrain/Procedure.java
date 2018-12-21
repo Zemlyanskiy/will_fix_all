@@ -6,46 +6,7 @@ import static java.lang.System.out;
 public class Procedure implements ProcedureInterface {
     @Override
     public void ReadChat(int userId, PrintWriter refCursor) {
-        /*Connection con = null;
-        CallableStatement toesUp = null;
-        Statement stmt = null;
-
-        try
-        {
-            con = ConnectionPool.getConnection();
-            stmt = con.createStatement(  );
-            // для PostgreSQL сначала нужно создать транзакцию (AutoCommit == false)...
-            con.setAutoCommit(false);
-
-            // Настраиваем вызов.
-            toesUp = con.prepareCall("{ ? = call ReadChat (userId, refCursor) }");
-            toesUp.registerOutParameter(1, Types.OTHER);
-            ResultSet getResults = toesUp.getResultSet();
-            stmt.execute();
-
-            ResultSet rs = (ResultSet) getResults.getObject(1);
-            while (rs.next())
-            {
-                String name = rs.getString(1);
-                int age = rs.getInt(2);
-                out.println(name + " was " + age + " years old.");
-            }
-            rs.close();
-        }
-        catch (SQLException e)
-        {
-            // Мы должны защитить эти вызовы.
-            try {
-                toesUp.close();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            try {
-                con.close();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-        }*/
+        
     }
 
     @Override
