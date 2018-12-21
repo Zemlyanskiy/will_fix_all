@@ -1,10 +1,13 @@
 package programbrain;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import org.postgresql.jdbc2.optional.ConnectionPool;
 
 import java.sql.*;
 >>>>>>> Connect success, add interface to override procedures
+=======
+>>>>>>> Resolve conflicts with travis
 import java.io.PrintWriter;
 
 import static java.lang.System.out;
