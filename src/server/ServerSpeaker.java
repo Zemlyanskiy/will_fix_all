@@ -121,12 +121,20 @@ public class ServerSpeaker extends Thread {
                     int id_user = _dis.readInt();
                     ServInt.RemoveManager(id_user);
                 }
+                case "GetRoot": { 
+                    int id_user = _dis.readInt();
+                    _dos.writeInt(ServInt.GetRoot(id_user));
+                    _dos.flush();
+                    break;
+                }
             }
         } catch (IOException ex) {
-                Logger.getLogger(ServerSpeaker.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Пользователь отсоединился!");
+            break;                
             }
 
         }
+        System.out.println("Поток закончил работу!");
     }
 }
 /*

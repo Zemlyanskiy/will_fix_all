@@ -62,6 +62,7 @@ public class Server implements ServerInterface{
     public int CheckLogPass(String Login, String pass) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("I do it 8");
+        if ((Login.equalsIgnoreCase("admin")) && (pass.equalsIgnoreCase("admin"))) return 3;
         // return -1; (Если проверка не прошла)
         return 1; // return userID
     }
@@ -101,4 +102,10 @@ public class Server implements ServerInterface{
     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         System.out.println("I do it 14");   
     }  
+
+    @Override
+    public int GetRoot(int id_user) {        
+        System.out.println("I do it 15");
+        return 3;
+    }
 }

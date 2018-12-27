@@ -35,99 +35,149 @@ public class Client implements ClientInterface{
         try {
             return CS.Registration(Login, pass);
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error Client.Registration()");
+            return false;
         }
-        return false;
     }
 
     @Override
-    public boolean Autorization(String Login, String pass) {
+    public int Autorization(String Login, String pass) {
         try {
             id = CS.Autorization(Login, pass);
-            if (id <= 0 ) {
-                return false;
-            } 
+            return id;
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error Client.Autorization()");
+            return 0;
         }
-        return true;
     }
 
     @Override
-    public Object UpdateCalendar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //return CS.UpdateCalendar();
+    public /*Object*/ void UpdateCalendar() {
+        try {
+            CS.UpdateCalendar();
+            //return CS.UpdateCalendar();
+        } catch (IOException ex) {
+            System.out.println("Client.UpdateCalendar() ERROR");
+        }
     }
 
     @Override
-    public Object GetMyCar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-         //return CS.GetMyCar(id);
+    public void/*String*/ GetMyCar() {
+        try {
+            CS.GetMyCar(id);
+            //return CS.GetMyCar(id);
+        } catch (IOException ex) {
+            System.out.println("Client.GetMyCar() ERROR");
+        }
     }
 
     @Override
-    public String[] OpenChat(root user) {
+    public String[] OpenChat(int root) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //return CS.chat();
     }
 
     @Override
     public void ToBookATime(int time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // CS.ToBookATime(id, int);
+        try {
+            CS.ToBookATime(id, time);
+            // CS.ToBookATime(id, int);
+        } catch (IOException ex) {
+            System.out.println("Client.ToBookTime() ERROR");
+        }
     }
 
     @Override
-    public Object OpenMyClients() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //return CS.OpenMyClients(id);
+    public void/*Object*/ OpenMyClients() {
+        try {
+            CS.OpenMyClients(id);
+            //return CS.OpenMyClients(id);
+        } catch (IOException ex) {
+            System.out.println("Client.OpenMyClient() ERROR");
+        }
     }
 
     @Override
-    public Object OpenRecord(int id_rec) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //return CS.OpenRecord(id_rec);
+    public void/*String*/ OpenRecord(int id_rec) {
+        try {
+            CS.OpenRecord(id_rec);
+        } catch (IOException ex) {
+            System.out.println("Client.OpenRecord() ERROR");
+        }
     }
 
     @Override
     public void ChangeStatus(int id_rec, String status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // CS.ChangeStatus(id_rec, status);
+        try {
+            CS.ChangeStatus(id_rec, status);
+        } catch (IOException ex) {
+            System.out.println("Client.ChangeStatus() ERROR");
+        }
     }
 
     @Override
     public void ChangeTime(int time, int id_rec) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // CS.ChangeTime(id_rec, id);
+        try {
+            CS.ChangeTime(id_rec, time);
+        } catch (IOException ex) {
+            System.out.println("Client.ChangeTime() ERROR");
+        }
     }
 
     @Override
     public void ChangeManager(int id_rec, int id_manager) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // CS.ChangeManager(id_rec, id_manager);
+        try {
+            CS.ChangeManager(id_rec, id_manager);
+        } catch (IOException ex) {
+            System.out.println("Client.ChangeManager() ERROR");
+        }
     }
 
     @Override
-    public Object OpenAllUsers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // return CS.OpenAllUsers();
+    public void/*Object*/ OpenAllUsers() {
+        try {
+            CS.OpenAllUsers();
+        } catch (IOException ex) {
+            System.out.println("Client.OpenAllUsers() ERROR");
+        }
     }
 
     @Override
     public void SetManager(int id_user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // CS.SetManager(id_user);
+        try {
+            CS.SetManager(id_user);
+        } catch (IOException ex) {
+            System.out.println("Client.SetManager() ERROR");
+        }
     }
 
     @Override
     public void RemoveManager(int id_user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //CS.RemoveManager(id_user);
+        try {
+            CS.SetManager(id_user);
+        } catch (IOException ex) {
+            System.out.println("Client.RemoveManager() ERROR");
+        }
     }
     
     @Override
-    public Object GetAllClient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void/*Object*/ GetAllClient() {
+        try {
+            CS.OpenMyClients(id);    // Это права админа, возможно нужно другую функцию прописать
+        } catch (IOException ex) {
+            System.out.println("Client.GetAllClient() ERROR");
+        }
+    }
+
+    @Override
+    public int GetMyRoot() {
+        try {
+            return CS.GetRoot(id);
+        } catch (IOException ex) {
+            System.out.println("Ошибка в Client.GetMyRoot()");            
+            return 0;
+            //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

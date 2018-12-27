@@ -190,4 +190,15 @@ public class ClientSpeaker {
     }
     // Снять роль менеджера
     
+    public int GetRoot(int id_user) throws IOException{
+        command = "GetRoot";
+        _dos.writeUTF(command);
+        _dos.flush(); 
+        
+        _dos.writeInt(id_user);
+        _dos.flush();        
+        
+        return _dis.readInt();
+    }
+    
 }

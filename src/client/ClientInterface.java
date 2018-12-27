@@ -24,17 +24,19 @@ public interface ClientInterface {
     boolean Registration(String Login, String pass);     
     // Регистрация, по умолчанию все клиенты.
     
-    boolean Autorization(String Login, String pass);     
+    int Autorization(String Login, String pass);     
     // Авторизация // возможна замена на root.
     
-    Object/*Все записи со временем*/ UpdateCalendar();    
+    int GetMyRoot();
+    
+    void/*ObjectВсе записи со временем*/ UpdateCalendar();    
     // Получить текущую версию календаря(актуальную)
     
-    Object/*запись*/ GetMyCar();          
+    void/*String*/ GetMyCar();          
     // Получить информацию о своей машине
     // id_rec - локальная переменная для каждого клиента.
     
-    String[] OpenChat(root user);   
+    String[] OpenChat(int root);   
 // Открыть чат( от имени какого пользователя мы открываем,
 // позволит менеджеру открывать чат от имени клиента и менеджера.
     
@@ -43,9 +45,9 @@ public interface ClientInterface {
     // ManagerInterface
     // У нас не будет этих кнопок у пользователя, мы их просто спрячем))
     
-    Object/*список*/ OpenMyClients();
+    void/*Object/*список*/ OpenMyClients();
     
-    Object/*запись*/ OpenRecord(int id_rec);
+    void/*String/*запись*/ OpenRecord(int id_rec);
     
     void ChangeStatus(int id_rec, String status);
     // сменить статус заказа на status
@@ -56,13 +58,13 @@ public interface ClientInterface {
     // AdminInterface
     // Аналогично так же поступим, как и клиент-менеджер.
     // Просто. Прячем. Кнопки...\
-    Object/*список*/ GetAllClient();
+    void/*Object/*список*/ GetAllClient();
     // Выдать список всех клиентов
     
     void ChangeManager(int id_rec, int id_manager);
     // Сменить менеджера записи rec, на другого.
     
-    Object/*список*/ OpenAllUsers();
+    void/*Object/*список*/ OpenAllUsers();
     // Выдать список зарегистрированных пользователей
     
     void SetManager(int id_user);

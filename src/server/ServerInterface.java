@@ -78,4 +78,6 @@ public interface ServerInterface {
     void RemoveManager(int id_user);
     // Снять роль менеджера
     
+    int GetRoot(int id_user);
+    
 }

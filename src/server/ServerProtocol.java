@@ -22,26 +22,25 @@ public class ServerProtocol extends Thread {
     ServerSpeaker ssp;
     private ServerSocket ss; 
     private Socket client;
+    
     ServerProtocol() throws IOException{
         ss = new ServerSocket(1234);
     }
     
     @Override
     public void run(){
-        // 
+         
         while (true) {
             try {                
                 client = ss.accept();
                 ssp = new ServerSpeaker(new DataInputStream(client.getInputStream()), new DataOutputStream(client.getOutputStream()));
-                ssp.run();
+                ssp.start();
             } catch (IOException ex) {
-                Logger.getLogger(ServerProtocol.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Упал(Не смог создать) сервер\n ServerProtocol.run() ERROR");                
             }
         }
         
-    }
-    
+    }   
     
 }
-
 
