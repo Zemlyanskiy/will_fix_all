@@ -1,9 +1,12 @@
-package server;
+package communication;
 
-public class Server implements ServerInterface{
+import com.sun.corba.se.spi.activation.Server;
+import server.*;
+
+public class FakeServer implements ServerInterface {
     private String answer;
 
-    public Server(){};
+    public FakeServer(){};
 
     @Override
     public String Registration(String Login, String pass) {
@@ -13,16 +16,16 @@ public class Server implements ServerInterface{
 
     @Override
     public String Autorization(String Login, String pass) {
-        answer = "true";
+        answer = "1";
         return answer;
     }
-    
+
     @Override
     public String SendCalendar() {
-        answer = "true";
+        answer = "22 21 21 22";
         return answer;
     }
-        
+
     @Override
     public String SendCarInfo(int id_rec) {
         answer = "true";

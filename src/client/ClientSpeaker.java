@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import java.io.DataInputStream;
@@ -10,195 +5,151 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- *
- * @author Umlore
- */
 public class ClientSpeaker {
-    // необходим наблюдатель для каждого, возможно доп поток.
-    // Функция refresh()
     private Socket server;
     private DataInputStream _dis;
     private DataOutputStream _dos;
-    
+
     private String command;
-    
-    public ClientSpeaker() throws IOException {
-        server = new Socket("localhost",1234); 
-        // В последствии ip:port
+
+    public ClientSpeaker(String _host, int _port) throws IOException {
+        server = new Socket(_host, _port);
+
         _dis = new DataInputStream(server.getInputStream());
         _dos = new DataOutputStream(server.getOutputStream());
     }
-    
+
     public boolean Registration(String Login, String pass) throws IOException {
-        
-        command = "Registration";
+
+        command = "Registration " + Login + ' ' + pass;
         _dos.writeUTF(command);
         _dos.flush();
-        
-        _dos.writeUTF(Login);
-        _dos.flush();
-        
-        _dos.writeUTF(pass);
-        _dos.flush();
-        
-        return _dis.readBoolean();
-    }   
-    // Регистрация, по умолчанию все клиенты.
-    
+
+        // "Success/Error type"
+        return Boolean.parseBoolean(_dis.readUTF());
+    }
+
     public int Autorization(String Login, String pass) throws IOException {
-        
-        command = "CheckingLogPass";
+
+        command = "Autorization " + Login + ' ' + pass;
         _dos.writeUTF(command);
         _dos.flush();
-        
-        _dos.writeUTF(Login);
+
+        // Permissions (0 - nobody, 1 - client, 2 -manager, 3 -admin), Login
+        return Integer.parseInt(_dis.readUTF());
+    }
+
+    public String GetCalendar() throws IOException {
+
+        command = "GetCalendar";
+        _dos.writeUTF(command);
         _dos.flush();
-        
-        _dos.writeUTF(pass);
+
+        // hh dd mm (status 0 1) hh dd mm (status 0 1) .... all entries
+        return _dis.readUTF();
+    }
+
+    public String GetCarInfo(int id_rec) throws IOException {
+
+        command = "GetCarInfo " + id_rec;
+        _dos.writeUTF(command);
         _dos.flush();
-        
-        return _dis.readInt();
+
+        // model number status
+        return _dis.readUTF();
     }
-    
-    public void /*ObjectВсе записи со временем*/ UpdateCalendar() throws IOException {
-        command = "GiveCalendar";
+
+    public String GetRecordInfo(int id_rec) throws IOException {
+
+        command = "GetRecordInfo "+id_rec;
         _dos.writeUTF(command);
-        _dos.flush(); 
-    }  
-    // Получить текущую версию календаря(актуальную)
-    
-    void /*Object/*запись*/ GetMyCar(int id_rec) throws IOException {
-        command = "GiveCar";
-        _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_rec);
         _dos.flush();
-    }          
-    // Получить информацию о своей машине
-    // id_rec - локальная переменная для каждого клиента.
-    
-//    public String[] OpenChat(root user);    Пока что не сделал
-// Открыть чат( от имени какого пользователя мы открываем,
-// позволит менеджеру открывать чат от имени клиента и менеджера.
-    
-    public void ToBookATime(int id_rec, int time) throws IOException {         
-        command = "ToBookATime";
+
+        // model number status
+        return _dis.readUTF();
+    }
+
+    public boolean ToBookATime(int id_rec, int time) throws IOException {
+
+        command = "ToBookATime " + id_rec + ' ' + time;
         _dos.writeUTF(command);
-        _dos.flush();   
-    
-        _dos.writeInt(id_rec);
         _dos.flush();
-        
-        _dos.writeInt(time);
+
+        // true/false (BookTime)
+        return Boolean.parseBoolean(_dis.readUTF());
+    }
+
+    // Manager
+
+    public String GetMyClientsInfo(int id_manager) throws IOException{
+
+        command = "GetMyClientsInfo " + id_manager;/*login*/
+        _dos.writeUTF(command);
         _dos.flush();
+
+        // iserid orderid login, userid orderid login ...
+        return _dis.readUTF();
+
     }
-    // забронировать время
-    
-    // ManagerInterface
-    // У нас не будет этих кнопок у пользователя, мы их просто спрячем))
-    
-    public void/*Object/*список*/ OpenMyClients(int id_manager) throws IOException{
-        command = "GiveClients";
+
+    public boolean ChangeStatus(int id_rec, String status) throws IOException {
+
+        command = "ChangeStatus " + id_rec + ' ' + status;
         _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_manager);
-        _dos.flush(); 
-        
-    }
-    
-    public void/*Object/*запись*/ OpenRecord(int id_rec) throws IOException {
-        command = "GiveRecord";
-        _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_rec);
-        _dos.flush(); 
-    }
-    
-    public void ChangeStatus(int id_rec, String status) throws IOException {
-       command = "ChangeStatus";
-        _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_rec);
-        _dos.flush(); 
-        
-        _dos.writeUTF(status);
         _dos.flush();
+
+        // true false
+        return Boolean.parseBoolean(_dis.readUTF());
     }
-    // сменить статус заказа на status
-    
-    public void ChangeTime(int id_rec, int time ) throws IOException {
-        command = "ChangeTime";
+
+    public boolean ChangeTime(int id_rec, int time ) throws IOException {
+
+        command = "ChangeTime " + id_rec + ' ' + time;
         _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_rec);
-        _dos.flush(); 
-        
-        _dos.writeInt(time);
         _dos.flush();
+
+        // true false
+        return Boolean.parseBoolean(_dis.readUTF());
     }
-    // Изменить время заказа на time. Time с помощью интерфейса определяется.
-    
-    // AdminInterface
-    // Аналогично так же поступим, как и клиент-менеджер.
-    // Просто. Прячем. Кнопки...\
-        
-    public void ChangeManager(int id_rec, int id_manager) throws IOException {
-        command = "ChangeManager";
+
+    // Administrator
+
+    public boolean ChangeManager(int id_rec, int id_manager) throws IOException {
+
+        command = "ChangeManager " + id_rec + ' ' + id_manager;
         _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_rec);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_manager);
-        _dos.flush();    
-    }
-    // Сменить менеджера записи rec, на другого.
-    
-    public void/*Object/*список*/ OpenAllUsers() throws IOException {
-        command = "GiveAllClient";
-        _dos.writeUTF(command);
-        _dos.flush(); 
-    }
-    // Выдать список зарегистрированных пользователей
-    
-    public void SetManager(int id_user) throws IOException{
-       command = "SetManager";
-        _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_user);
         _dos.flush();
+
+        // true false
+        return Boolean.parseBoolean(_dis.readUTF());
     }
-    // Назначить менеджером
-    
-    public void RemoveManager(int id_user) throws IOException{
-        command = "RemoveManager";
+
+    public boolean SetManager(int id_user) throws IOException{
+
+        command = "SetManager " + id_user;
         _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_user);
         _dos.flush();
-        
-        
+
+        // true false
+        return Boolean.parseBoolean(_dis.readUTF());
     }
-    // Снять роль менеджера
-    
-    public int GetRoot(int id_user) throws IOException{
-        command = "GetRoot";
+
+    public boolean RemoveManager(int id_user) throws IOException{
+        command = "RemoveManager " + id_user;
         _dos.writeUTF(command);
-        _dos.flush(); 
-        
-        _dos.writeInt(id_user);
-        _dos.flush();        
-        
-        return _dis.readInt();
+        _dos.flush();
+
+        // true false
+        return Boolean.parseBoolean(_dis.readUTF());
     }
-    
+
+    public String GetAllUsersInfo() throws IOException {
+        command = "GetAllUsersInfo";
+        _dos.writeUTF(command);
+        _dos.flush();
+
+        // login id_user login id_user ...
+        return _dis.readUTF();
+    }
+
 }

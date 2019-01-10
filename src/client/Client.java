@@ -1,35 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-/**
- *
- * @author Umlore
- */
 
 public class Client implements ClientInterface{
-    
+
     private root Status;
     private int id;
     private ClientSpeaker CS;
-    
-    public Client() throws IOException {
-        CS = new ClientSpeaker();
+
+    public Client(String _host, int _port) throws IOException {
+        CS = new ClientSpeaker(_host, _port);
         id = 0;
     }
-    
-    public root GiveStatus(){
+
+    @Override
+    public root GetStatus(){
         return Status;
     }
-    
+
     @Override
     public boolean Registration(String Login, String pass) {
         try {
@@ -52,9 +40,9 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public /*Object*/ void UpdateCalendar() {
+    public void UpdateCalendar() {
         try {
-            CS.UpdateCalendar();
+            CS.GetCalendar();
             //return CS.UpdateCalendar();
         } catch (IOException ex) {
             System.out.println("Client.UpdateCalendar() ERROR");
@@ -62,9 +50,9 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void/*String*/ GetMyCar() {
+    public void GetMyCar() {
         try {
-            CS.GetMyCar(id);
+            CS.GetCarInfo(id);
             //return CS.GetMyCar(id);
         } catch (IOException ex) {
             System.out.println("Client.GetMyCar() ERROR");
@@ -72,9 +60,12 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public String[] OpenChat(int root) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //return CS.chat();
+    public void OpenRecord(int id_rec) {
+        try {
+            CS.GetRecordInfo(id_rec);
+        } catch (IOException ex) {
+            System.out.println("Client.OpenRecord() ERROR");
+        }
     }
 
     @Override
@@ -87,22 +78,14 @@ public class Client implements ClientInterface{
         }
     }
 
-    @Override
-    public void/*Object*/ OpenMyClients() {
-        try {
-            CS.OpenMyClients(id);
-            //return CS.OpenMyClients(id);
-        } catch (IOException ex) {
-            System.out.println("Client.OpenMyClient() ERROR");
-        }
-    }
+    // Manager
 
     @Override
-    public void/*String*/ OpenRecord(int id_rec) {
+    public void OpenMyClients() {
         try {
-            CS.OpenRecord(id_rec);
+            CS.GetMyClientsInfo(id);
         } catch (IOException ex) {
-            System.out.println("Client.OpenRecord() ERROR");
+            System.out.println("Client.OpenMyClient() ERROR");
         }
     }
 
@@ -124,21 +107,14 @@ public class Client implements ClientInterface{
         }
     }
 
+    // Administrator
+
     @Override
     public void ChangeManager(int id_rec, int id_manager) {
         try {
             CS.ChangeManager(id_rec, id_manager);
         } catch (IOException ex) {
             System.out.println("Client.ChangeManager() ERROR");
-        }
-    }
-
-    @Override
-    public void/*Object*/ OpenAllUsers() {
-        try {
-            CS.OpenAllUsers();
-        } catch (IOException ex) {
-            System.out.println("Client.OpenAllUsers() ERROR");
         }
     }
 
@@ -159,25 +135,14 @@ public class Client implements ClientInterface{
             System.out.println("Client.RemoveManager() ERROR");
         }
     }
-    
+
     @Override
-    public void/*Object*/ GetAllClient() {
+    public void OpenAllUsers() {
         try {
-            CS.OpenMyClients(id);    // Это права админа, возможно нужно другую функцию прописать
+            CS.GetAllUsersInfo();
         } catch (IOException ex) {
-            System.out.println("Client.GetAllClient() ERROR");
+            System.out.println("Client.OpenAllUsers() ERROR");
         }
     }
 
-    @Override
-    public int GetMyRoot() {
-        try {
-            return CS.GetRoot(id);
-        } catch (IOException ex) {
-            System.out.println("Ошибка в Client.GetMyRoot()");            
-            return 0;
-            //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
 }

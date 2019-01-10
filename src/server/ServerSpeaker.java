@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import java.io.DataInputStream;
@@ -10,146 +5,169 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.StringTokenizer;
 
-/**
- *
- * @author Umlore
- */
 public class ServerSpeaker extends Thread {
-    
+
     private DataInputStream _dis;
     private DataOutputStream _dos;
-    
+
     private ServerInterface ServInt;
-    
+
     private String command;
-    
-    ServerSpeaker(DataInputStream dis, DataOutputStream dos){
+    private String data;
+    private String answer;
+
+    ServerSpeaker(DataInputStream dis, DataOutputStream dos, ServerInterface server){
         _dis = dis;
         _dos = dos;
-        ServInt = new Server();
+        ServInt = server;
     }
-            
+
     @Override
     public void run(){
        while (true) {
             try {
-                command = _dis.readUTF();
-                          
-            switch (command) {
-                case "GiveCalendar": { 
-                    /*_dos.write()*/ServInt.SendCalendar();// скорее всего give calendar
-                    // _dos.flush
-                    break;
-                }
-                case "GiveCar": {
-                    int id_rec = _dis.readInt();
-                    /*_dos.write()*/ServInt.GiveCar(id_rec);
-                    // _dos.flush
-                     break;
-                } 
-                case "GiveClients" : {
-                    int id_manager = _dis.readInt();
-                    /*_dos.write()*/ServInt.GiveClients(id_manager);
-                     break;
-                }
-                
-                case "GiveRecord": {
-                    int id_rec = _dis.readInt();
-                    /*_dos.write()*/ServInt.GiveRecord(id_rec);
-                    // _dos.flush
-                     break;
-                }
-                case "GiveAllClient" : {
-                      /*_dos.write()*/ServInt.GiveAllClient();
-                      // _dos.flush
-                       break;
-                }
-                
-                case "Registration" : {
-                    String Login = _dis.readUTF();
-                    String pass = _dis.readUTF();
-                    
-                    _dos.writeBoolean(ServInt.Registration(Login, pass));
-                    _dos.flush();
-                     break;
-                }
-                
-                case "CheckingLogPass" : {
-                    String Login = _dis.readUTF();
-                    String pass = _dis.readUTF();
-                    
-                    _dos.writeInt(ServInt.CheckLogPass(Login, pass));
-                    _dos.flush(); 
-                    break;
-                    
-                }
-                
-                case "ToBookATime" : {
-                    int id_rec = _dis.readInt();
-                    int time = _dis.readInt();
-                    ServInt.ToBookATime(id_rec, time);
-                }
-                case "ChangeStatus" : {
-                    int id_rec = _dis.readInt();
-                    String stat = _dis.readUTF();
-                    ServInt.ChangeStatus(id_rec, stat);
-                     break;
-                }
-                
-                case "ChangeTime" : {
-                    int id_rec = _dis.readInt();
-                    int time = _dis.readInt();
-                    ServInt.ChangeTime(time, id_rec);
-                    break;
-                }
-                
-                case "ChangeManager" : {
-                    int id_rec = _dis.readInt();
-                    int id_manager = _dis.readInt();
-                    ServInt.ChangeManager(id_rec, id_manager);
-                    break;
-                }
-                
-                case "SetManager" : {
-                   int id_user = _dis.readInt();
-                   ServInt.SetManager(id_user);
-                   break;
-                }
-                
-                case "RemoveManager" : {
-                    int id_user = _dis.readInt();
-                    ServInt.RemoveManager(id_user);
-                }
-                case "GetRoot": { 
-                    int id_user = _dis.readInt();
-                    _dos.writeInt(ServInt.GetRoot(id_user));
-                    _dos.flush();
-                    break;
-                }
-            }
-        } catch (IOException ex) {
-            System.out.println("Пользователь отсоединился!");
-            break;                
-            }
+                data = _dis.readUTF();
+                StringTokenizer stok = new StringTokenizer(data, " ");
+                command = stok.nextToken();
 
+                switch (command) {
+                    case "Registration": {
+                        String Login = stok.nextToken();
+                        String pass = stok.nextToken();
+
+                        answer = ServInt.Registration(Login, pass);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+
+                        break;
+                    }
+
+                    case "Autorization": {
+                        String Login = stok.nextToken();
+                        String pass = stok.nextToken();
+
+                        answer = ServInt.Autorization(Login, pass);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+
+                        break;
+                    }
+                    case "GetCalendar": {
+                        answer = ServInt.SendCalendar();// скорее всего give calendar
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+                    case "GetCarInfo": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.SendCarInfo(id_rec);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+                    case "GetRecordInfo": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.SendRecordInfo(id_rec);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+                    case "ToBookATime": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        int time = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.ToBookATime(id_rec, time);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    // Manager
+
+                    case "GetMyClientsInfo": {
+                        int id_manager = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.SendClientInfoToManager(id_manager);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+                    case "ChangeStatus": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        String stat = stok.nextToken();
+                        answer = ServInt.ChangeStatus(id_rec, stat);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    case "ChangeTime": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        int time = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.ChangeTime(time, id_rec);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    // Administrator
+
+                    case "ChangeManager": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        int id_manager = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.ChangeManager(id_rec, id_manager);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    case "SetManager": {
+                        int id_user = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.SetManager(id_user);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    case "RemoveManager": {
+                        int id_user = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.RemoveManager(id_user);
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
+
+                    case "GetAllUsersInfo": {
+                        answer = ServInt.SendAllUsersInfo();
+
+                        _dos.writeUTF(answer);
+                        _dos.flush();
+                        break;
+                    }
         }
-        System.out.println("Поток закончил работу!");
+            } catch (IOException ex) {
+                System.out.println("Connection error!");
+                break;
+            }
+        }
     }
 }
-/*
 
-
-    // OTHER FUNCTION
-    // User
-
-
-
-    // AdminInterface
-
-    void ChangeManager(int id_rec, int id_manager);
-
-    void SetManager(int id_user);
-
-    void RemoveManager(int id_user);
+/* AdminInterface:
+ *
+ *    void ChangeManager(int id_rec, int id_manager);
+ *    void SetManager(int id_user);
+ *    void RemoveManager(int id_user);
  */

@@ -1,22 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import java.io.IOException;
 
-/**
- *
- * @author Umlore
- */
 public class ServerStart extends javax.swing.JFrame {
 
     ServerProtocol SP;
-    /**
-     * Creates new form ServerStart
-     */
+
     public ServerStart() {
         SP = null;
         initComponents();
@@ -65,7 +54,7 @@ public class ServerStart extends javax.swing.JFrame {
     private void StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartActionPerformed
         if (SP == null) {
             try {
-                SP = new ServerProtocol();
+                SP = new ServerProtocol(1234, new Server());
                 SP.start();
                 System.out.println("Сервер запустился!");
             } catch (IOException ex) {
@@ -81,7 +70,7 @@ public class ServerStart extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
