@@ -10,57 +10,90 @@ public class FakeServer implements ServerInterface {
 
     @Override
     public String Registration(String Login, String pass) {
-        answer = "true";
+        if (Login.equals("TrueLogin") && pass.equals("TruePassword"))
+            answer = "true";
+        else
+            answer = "false";
         return answer;
     }
 
     @Override
     public String Autorization(String Login, String pass) {
-        answer = "1";
+        if (Login.equals("UserLogin") && pass.equals("UserPassword"))
+            answer = "1";
+        else if (Login.equals("ManagerLogin") && pass.equals("ManagerPassword"))
+            answer = "2";
+        else if (Login.equals("AdminLogin") && pass.equals("AdminPassword"))
+            answer = "3";
+        else
+            answer = "0";
         return answer;
     }
 
     @Override
     public String SendCalendar() {
-        answer = "22 21 21 22";
+        // hhddmm (status 0 1) hhddmm (status 0 1) .... all entries
+        // 100101 - 10:00 01 january
+        answer = "100101 1 110101 1 120101 0";
         return answer;
     }
 
     @Override
     public String SendCarInfo(int id_rec) {
-        answer = "true";
+        //Wrong id_rec
+        if (id_rec == -1 )
+            answer = "ERROR ERROR -1";
+        else
+            answer = "lada r367vo 0";
         return answer;
     }
 
     @Override
-    public String SendRecordInfo(int id_manager) {
-        answer = "true";
+    public String SendRecordInfo(int id_rec) {
+        //Wrong id_rec
+        if (id_rec == -1 )
+            answer = "ERROR ERROR -1";
+        else
+            answer = "toyota r367vo 0";
         return answer;
     }
 
     @Override
     public String ToBookATime(int id_rec, int time) {
-        answer = "true";
+        // Wrong or booked time
+        if (time == 100000)
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
     // Manager
 
     @Override
-    public String SendClientInfoToManager(int id_rec) {
-        answer = "true";
+    public String SendClientsInfoToManager(int id_manager) {
+        if (id_manager == 1)
+            answer = "1 1 username1 2 3 username2";
+        else
+            answer = "-1 -1 ERROR";
         return answer;
     }
 
     @Override
     public String ChangeStatus(int id_rec, String status) {
-        answer = "true";
+        if (id_rec == -1 )
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
     @Override
     public String ChangeTime(int id_rec, int time) {
-        answer = "true";
+        if (id_rec == -1 || time == 100000 )
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
@@ -68,25 +101,34 @@ public class FakeServer implements ServerInterface {
 
     @Override
     public String ChangeManager(int id_rec, int id_manager) {
-        answer = "true";
+        if (id_rec == -1 || id_manager == -1 )
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
     @Override
     public String SetManager(int id_user) {
-        answer = "true";
+        if (id_user == -1)
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
     @Override
     public String RemoveManager(int id_user) {
-        answer = "true";
+        if (id_user == -1)
+            answer = "false";
+        else
+            answer = "true";
         return answer;
     }
 
     @Override
     public String SendAllUsersInfo() {
-        answer = "true";
+        answer = "username1 1 username2 2";
         return answer;
     }
 }

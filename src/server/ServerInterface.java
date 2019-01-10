@@ -16,7 +16,7 @@ public interface ServerInterface {
     
     // Manager
 
-    String SendClientInfoToManager(int id_manager);
+    String SendClientsInfoToManager(int id_manager);
 
     String ChangeStatus(int id_rec, String status);
 

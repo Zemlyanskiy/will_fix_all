@@ -43,7 +43,6 @@ public class Client implements ClientInterface{
     public void UpdateCalendar() {
         try {
             CS.GetCalendar();
-            //return CS.UpdateCalendar();
         } catch (IOException ex) {
             System.out.println("Client.UpdateCalendar() ERROR");
         }

@@ -45,7 +45,7 @@ public class ClientSpeaker {
         _dos.writeUTF(command);
         _dos.flush();
 
-        // hh dd mm (status 0 1) hh dd mm (status 0 1) .... all entries
+        // hhddmm (status 0 1) hhddmm (status 0 1) .... all entries
         return _dis.readUTF();
     }
 
@@ -70,7 +70,7 @@ public class ClientSpeaker {
     }
 
     public boolean ToBookATime(int id_rec, int time) throws IOException {
-
+        // Time is hhddmm  (101201 - 10:00 12 january)
         command = "ToBookATime " + id_rec + ' ' + time;
         _dos.writeUTF(command);
         _dos.flush();
@@ -107,7 +107,6 @@ public class ClientSpeaker {
         command = "ChangeTime " + id_rec + ' ' + time;
         _dos.writeUTF(command);
         _dos.flush();
-
         // true false
         return Boolean.parseBoolean(_dis.readUTF());
     }

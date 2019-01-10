@@ -93,7 +93,7 @@ public class ServerSpeaker extends Thread {
 
                     case "GetMyClientsInfo": {
                         int id_manager = Integer.parseInt(stok.nextToken());
-                        answer = ServInt.SendClientInfoToManager(id_manager);
+                        answer = ServInt.SendClientsInfoToManager(id_manager);
 
                         _dos.writeUTF(answer);
                         _dos.flush();
@@ -112,7 +112,7 @@ public class ServerSpeaker extends Thread {
                     case "ChangeTime": {
                         int id_rec = Integer.parseInt(stok.nextToken());
                         int time = Integer.parseInt(stok.nextToken());
-                        answer = ServInt.ChangeTime(time, id_rec);
+                        answer = ServInt.ChangeTime(id_rec, time);
 
                         _dos.writeUTF(answer);
                         _dos.flush();
