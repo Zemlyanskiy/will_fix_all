@@ -1,11 +1,11 @@
-package programbrain;
+package examples;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ProgramBrain {
+public class ExampleDataBaseConnection {
 
     //  Database credentials
     static final String DB_URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/evejlbgk";
