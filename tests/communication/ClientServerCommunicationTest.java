@@ -68,7 +68,7 @@ public class ClientServerCommunicationTest {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
         String answer = speaker.Autorization("FailLogin", "FailPassword");
 
-        Assert.assertEquals(answer, 0);
+        Assert.assertEquals(answer, "0");
     }
 
     @Test
@@ -119,7 +119,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void SuccessToBookATimeTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.ToBookATime( 1, "101010" );
+        boolean answer = speaker.ToBookATime( 1, "10:00 01.01" );
 
         Assert.assertTrue(answer);
     }
@@ -127,7 +127,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void FailToBookATimeTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.ToBookATime( 1, "100000" );
+        boolean answer = speaker.ToBookATime( 1, "10:00 02.01" );
 
         Assert.assertFalse(answer);
     }

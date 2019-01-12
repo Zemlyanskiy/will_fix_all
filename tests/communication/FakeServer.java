@@ -1,7 +1,6 @@
 package communication;
 
-import com.sun.corba.se.spi.activation.Server;
-import server.*;
+import server.ServerInterface;
 
 public class FakeServer implements ServerInterface {
     private String answer;
@@ -20,13 +19,19 @@ public class FakeServer implements ServerInterface {
     @Override
     public String Autorization(String Login, String pass) {
         if (Login.equals("UserLogin") && pass.equals("UserPassword"))
+        {
             answer = "1";
-        else if (Login.equals("ManagerLogin") && pass.equals("ManagerPassword"))
-            answer = "2";
-        else if (Login.equals("AdminLogin") && pass.equals("AdminPassword"))
-            answer = "3";
-        else
-            answer = "0";
+        }
+        else {
+            if (Login.equals("ManagerLogin") && pass.equals("ManagerPassword"))
+                answer = "2";
+            else {
+                if (Login.equals("AdminLogin") && pass.equals("AdminPassword"))
+                    answer = "3";
+                else
+                    answer = "0";
+            }
+        }
         return answer;
     }
 
@@ -71,7 +76,7 @@ public class FakeServer implements ServerInterface {
     @Override
     public boolean ToBookATime(int id_rec, String time) {
         // Wrong or booked time
-        if (time.equalsIgnoreCase("100000"))
+        if (time.equalsIgnoreCase("100101"))
             return true;
         else
             return false;
