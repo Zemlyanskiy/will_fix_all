@@ -20,7 +20,7 @@ public class Calendar extends Thread{
     @Override
     public void run() {
         while (true) {
-            _window.UpdateCalendar();
+            _window.UpdateInfo();
             try {
                 sleep(2500);
             } catch (InterruptedException ex) {

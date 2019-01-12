@@ -2,6 +2,8 @@ package client;
 
 public interface ClientInterface {
     
+    void RemoveIdRec();
+    
     int GetStatus();
 
     boolean Registration(String Login, String pass);
@@ -12,7 +14,7 @@ public interface ClientInterface {
 
     String GetMyCar();
 
-    void OpenRecord(int id_rec);
+    String OpenRecord(int id_rec);
 
     void ToBookATime(String str);
 
@@ -22,9 +24,9 @@ public interface ClientInterface {
     
     // Manager
 
-    void OpenMyClients();
+    String OpenMyClients();
 
-    void ChangeStatus(int id_rec, String status);
+    void ChangeStatus(String status);
 
     void ChangeTime(int time, int id_rec);
 

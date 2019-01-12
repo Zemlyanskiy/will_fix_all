@@ -2,14 +2,12 @@ package client;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Client implements ClientInterface{
 
     private int Status;
     private int id;
-    private int id_rec;         // if it's manager. we must remember his client
+    private int _id_rec;         // if it's manager. we must remember his client
     private ClientSpeaker CS;
     
     private String answer;
@@ -17,9 +15,14 @@ public class Client implements ClientInterface{
     public Client(String _host, int _port) throws IOException {
         CS = new ClientSpeaker(_host, _port);
         id = 0;
-        id_rec = 0;
+        _id_rec = 0;
     }
 
+    @Override
+    public void RemoveIdRec() {
+        _id_rec = 0;
+    }
+    
     @Override
     public int GetStatus(){
         return Status;
@@ -71,11 +74,13 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void OpenRecord(int id_rec) {
+    public String OpenRecord(int id_rec) {
         try {
-            CS.GetRecordInfo(id_rec);
+            _id_rec = id_rec;
+            return CS.GetRecordInfo(id_rec);
         } catch (IOException ex) {
             System.out.println("Client.OpenRecord() ERROR");
+            return "Connection Error";
         }
     }
 
@@ -103,8 +108,8 @@ public class Client implements ClientInterface{
     public boolean SendMessage(String message) {
         try {
             message += "\n";
-            if (id_rec == 0) return CS.SendMessage(message, id, Status);
-            return CS.SendMessage(message, id_rec, Status);
+            if (_id_rec == 0) return CS.SendMessage(message, id, 1);
+            return CS.SendMessage(message, _id_rec, Status);
         } catch (IOException ex) {
             System.out.println("Client.SendMessage() ERROR. Can't send message!");
             return false;
@@ -114,18 +119,19 @@ public class Client implements ClientInterface{
     // Manager
 
     @Override
-    public void OpenMyClients() {
+    public String OpenMyClients() {
         try {
-            CS.GetMyClientsInfo(id);
+            return CS.GetMyClientsInfo(id);
         } catch (IOException ex) {
             System.out.println("Client.OpenMyClient() ERROR");
+            return "Connection failed";
         }
     }
 
     @Override
-    public void ChangeStatus(int id_rec, String status) {
+    public void ChangeStatus(String status) {
         try {
-            CS.ChangeStatus(id_rec, status);
+            CS.ChangeStatus(_id_rec, status);
         } catch (IOException ex) {
             System.out.println("Client.ChangeStatus() ERROR");
         }

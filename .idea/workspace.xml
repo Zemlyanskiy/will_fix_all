@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e06c316f-b861-4e15-a1d2-e74048e2dd1d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,36 +12,6 @@
   </component>
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1998045560">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="java" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JAVA" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="44" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="44" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -54,35 +24,62 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server/ServerRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="53" lean-forward="true" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+            <state relative-caret-position="187">
+              <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/ServerStart.java">
+        <entry file="file://$PROJECT_DIR$/src/programbrain/Procedure.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="61" selection-end-column="13" />
+            <state relative-caret-position="102">
+              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
               <folding>
-                <element signature="e#457#546#0" expanded="true" />
-                <element signature="method#initComponents#0;class#ServerStart#0" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/programbrain/ProcedureInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/programbrain/ProgramBrain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#62307#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="561">
+              <caret line="493" column="57" selection-start-line="493" selection-start-column="57" selection-end-line="493" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -121,7 +118,6 @@
         <option value="$PROJECT_DIR$/src/server/ServerSpeaker.java" />
         <option value="$PROJECT_DIR$/src/server/Server.java" />
         <option value="$PROJECT_DIR$/tests/server/ServerTest.java" />
-        <option value="$PROJECT_DIR$/src/programbrain/ProgramBrain.java" />
         <option value="$PROJECT_DIR$/src/programbrain/ProcedureInterface.java" />
         <option value="$PROJECT_DIR$/src/programbrain/Procedure.java" />
         <option value="$PROJECT_DIR$/NetBeansGUI/Autorization.java" />
@@ -131,6 +127,8 @@
         <option value="$PROJECT_DIR$/tests/communication/FakeServer.java" />
         <option value="$PROJECT_DIR$/tests/communication/ClientServerCommunicationTest.java" />
         <option value="$PROJECT_DIR$/src/server/ServerRun.java" />
+        <option value="$PROJECT_DIR$/src/programbrain/ProgramBrain.java" />
+        <option value="$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -145,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -155,7 +154,37 @@
             <path>
               <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
               <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="NetBeansGUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="NetBeansGUI" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="NetBeansGUI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
+              <item name="will_fix_all" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="programbrain" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="will_fix_all" type="b2602c69:ProjectViewProjectNode" />
@@ -167,7 +196,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -178,7 +206,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547308013358" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547325005201" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/postgresql-42.2.5.jar!/" />
@@ -209,7 +237,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ServerRun">
+  <component name="RunManager" selected="Application.ProgramBrain">
     <configuration name="ProgramBrain (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="programbrain.ProgramBrain" />
       <module name="will_fix_all" />
@@ -290,19 +318,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ProgramBrain" />
       <item itemvalue="Application.ProgramBrain (1)" />
+      <item itemvalue="Application.ServerRun" />
       <item itemvalue="JUnit.All in will_fix_all" />
       <item itemvalue="JUnit.ClientServerCommunicationTest" />
       <item itemvalue="JUnit.ClientServerCommunicationTest.SuccessToBookATimeTest" />
-      <item itemvalue="Application.ServerRun" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ProgramBrain" />
         <item itemvalue="Application.ServerRun" />
         <item itemvalue="JUnit.ClientServerCommunicationTest" />
         <item itemvalue="JUnit.ClientServerCommunicationTest.SuccessToBookATimeTest" />
         <item itemvalue="JUnit.All in will_fix_all" />
-        <item itemvalue="Application.ProgramBrain (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -352,10 +381,9 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18443497" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19591528" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -374,7 +402,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3267974" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.092750534" />
+      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.09228442" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -386,9 +414,6 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -478,13 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/programbrain/ProcedureInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -493,35 +511,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/server/ServerTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/programbrain/Procedure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NetBeansGUI/ClientMainWindow.java" />
     <entry file="file://$PROJECT_DIR$/NetBeansGUI/Orders.java" />
     <entry file="file://$PROJECT_DIR$/NetBeansGUI/Users.java" />
     <entry file="file://$PROJECT_DIR$/NetBeansGUI/Autorization.java" />
     <entry file="file://$PROJECT_DIR$/NetBeansGUI/src/Test/Test.java" />
-    <entry file="file://$PROJECT_DIR$/src/programbrain/ProgramBrain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/ServerInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -575,6 +569,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/ServerStart.java" />
     <entry file="file://$PROJECT_DIR$/tests/communication/ClientServerCommunicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -582,30 +577,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#62307#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/ServerStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="54" column="8" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="61" selection-end-column="13" />
-          <folding>
-            <element signature="e#457#546#0" expanded="true" />
-            <element signature="method#initComponents#0;class#ServerStart#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/ServerRun.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="53" lean-forward="true" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+        <state relative-caret-position="187">
+          <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programbrain/Procedure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programbrain/ProcedureInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programbrain/ProgramBrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NetBeansGUI/src/Test/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="493" column="57" selection-start-line="493" selection-start-column="57" selection-end-line="493" selection-end-column="57" />
         </state>
       </provider>
     </entry>

@@ -8,12 +8,9 @@ package Test;
 import client.Calendar;
 import client.Client;
 import client.ClientInterface;
-import java.awt.Color;
+
 import java.io.IOException;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
 
 /**
  *
@@ -25,10 +22,11 @@ public class MainWindow extends javax.swing.JFrame {
     private Calendar calend;
             
     private int _root;
-    private String ModelCar;
+    private String temp;
     private String answ;
     
     boolean flag;
+    boolean IsLogin;
     /**
      * Creates new form Test
      */
@@ -41,6 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
             System.out.println("Не создал Клиента\n Test()");
         }        
         flag = false;
+        IsLogin = false;
         _root = 0;
         initComponents();
         MyCar.setVisible(false);
@@ -51,22 +50,53 @@ public class MainWindow extends javax.swing.JFrame {
         Orders.setVisible(false);
         Users.setVisible(false);
         MyCarWindow.setVisible(false);
-        ChatPanel.setVisible(false);
         RegistrationPanel.setVisible(false);
         
         EmptyDate.setVisible(false);
         Help.setVisible(false);
         Reserved.setVisible(false);
         
+        Chat.setText(CI.OpenChat());
+        
         calend = new Calendar(this);
         calend.start();
     }
 
-    public void UpdateCalendar(){
-        SetCalendar(CI.UpdateCalendar());
+    public void UpdateInfo(){
+        UpdateCalendar();
+        UpdateChat();
+        if (_root > 1) UpdateOrders();
     }
     
-    private void SetCalendar(String calendar){
+    private void UpdateOrders(){
+        answ = CI.OpenMyClients();
+        StringTokenizer stok = new StringTokenizer(answ, " ");
+        
+        int i = 0;
+        
+        Clients.removeAllItems();
+                
+        while (stok.hasMoreTokens()){
+            AllCars.setValueAt(stok.nextToken(), i, 0);
+            temp = stok.nextToken();
+            Clients.addItem(temp);
+            AllCars.setValueAt(temp, i, 1);
+            AllCars.setValueAt(stok.nextToken(), i, 2);
+            AllCars.setValueAt(stok.nextToken(), i, 3);
+            i++;
+        }
+        
+        i = 0;
+    }
+    
+    private void UpdateChat(){
+        if (IsLogin)
+            Chat.setText(CI.OpenChat());
+    }
+    
+    private void UpdateCalendar(){
+        
+        String calendar = CI.UpdateCalendar();
         
         if (!flag){
             for (int i = 0; i < 7; i++) {
@@ -75,6 +105,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
             flag = true;
         }
+        
+        if (IsLogin)
+            Chat.setText(CI.OpenChat());
         
         EmptyDate.removeAllItems();
         
@@ -143,7 +176,6 @@ public class MainWindow extends javax.swing.JFrame {
         CanselMyCar = new javax.swing.JButton();
         MyCarModel = new javax.swing.JLabel();
         MyCarStatus = new javax.swing.JLabel();
-        ChatButton = new javax.swing.JButton();
         ChatPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Chat = new javax.swing.JTextArea();
@@ -154,13 +186,11 @@ public class MainWindow extends javax.swing.JFrame {
         NewStatusH = new javax.swing.JLabel();
         NewOrderStatus = new javax.swing.JTextField();
         Orders = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        OpenThisOrder1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        Status1 = new javax.swing.JLabel();
         Clients = new javax.swing.JComboBox<>();
         CanselOrders = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        AllCars = new javax.swing.JTable();
+        OpenOrder = new javax.swing.JButton();
         Users = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -188,30 +218,32 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Registration.setBackground(new java.awt.Color(100, 240, 100));
+        Registration.setBackground(new java.awt.Color(180, 180, 180));
         Registration.setText("Регистрация");
+        Registration.setFocusable(false);
         Registration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrationActionPerformed(evt);
             }
         });
 
-        AutorizationButton.setBackground(new java.awt.Color(240, 240, 100));
+        AutorizationButton.setBackground(new java.awt.Color(180, 180, 180));
         AutorizationButton.setText("Авторизоваться");
-        AutorizationButton.setBorderPainted(false);
         AutorizationButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        AutorizationButton.setMaximumSize(new java.awt.Dimension(123, 23));
-        AutorizationButton.setMinimumSize(new java.awt.Dimension(123, 23));
-        AutorizationButton.setPreferredSize(new java.awt.Dimension(123, 23));
+        AutorizationButton.setFocusable(false);
+        AutorizationButton.setMaximumSize(new java.awt.Dimension(123, 28));
+        AutorizationButton.setMinimumSize(new java.awt.Dimension(123, 28));
+        AutorizationButton.setPreferredSize(new java.awt.Dimension(123, 28));
         AutorizationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AutorizationButtonActionPerformed(evt);
             }
         });
 
-        Exit.setBackground(new java.awt.Color(240, 100, 100));
+        Exit.setBackground(new java.awt.Color(180, 180, 180));
         Exit.setText("Выход из учётной записи");
         Exit.setBorderPainted(false);
+        Exit.setFocusable(false);
         Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitActionPerformed(evt);
@@ -220,9 +252,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -252,14 +281,13 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Table1.setColumnSelectionAllowed(true);
+        Table1.setCellSelectionEnabled(false);
+        Table1.setEnabled(false);
+        Table1.setFocusable(false);
         Table1.getTableHeader().setReorderingAllowed(false);
 
         Table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -289,10 +317,11 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Table2.setColumnSelectionAllowed(true);
+        Table2.setCellSelectionEnabled(false);
+        Table2.setFocusable(false);
         Table2.getTableHeader().setReorderingAllowed(false);
 
-        Reserved.setBackground(new java.awt.Color(100, 200, 100));
+        Reserved.setBackground(new java.awt.Color(180, 200, 180));
         Reserved.setText("Зарезервировать время");
         Reserved.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,24 +331,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         Help.setText("Выберите удобное свободное время и нажмите на");
 
-        MyCar.setBackground(new java.awt.Color(102, 153, 0));
+        MyCar.setBackground(new java.awt.Color(180, 180, 180));
         MyCar.setText("Машина");
+        MyCar.setFocusable(false);
         MyCar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MyCarActionPerformed(evt);
             }
         });
 
-        MyOrders.setBackground(new java.awt.Color(51, 153, 255));
+        MyOrders.setBackground(new java.awt.Color(180, 180, 180));
         MyOrders.setText("Заказы");
+        MyOrders.setFocusable(false);
         MyOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MyOrdersActionPerformed(evt);
             }
         });
 
-        AllUsers.setBackground(new java.awt.Color(153, 153, 153));
+        AllUsers.setBackground(new java.awt.Color(180, 180, 180));
         AllUsers.setText("Все пользователи");
+        AllUsers.setFocusable(false);
         AllUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AllUsersActionPerformed(evt);
@@ -367,15 +399,15 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(MyOrders)
                     .addComponent(AllUsers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Table1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Table1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Table2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Table2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Reserved)
                     .addComponent(Help)
                     .addComponent(EmptyDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         Autorization.setLayout(null);
@@ -424,16 +456,9 @@ public class MainWindow extends javax.swing.JFrame {
         MyCarStatus.setText("Статус заказа");
         MyCarStatus.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        ChatButton.setText("Открыть чат");
-        ChatButton.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        ChatButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChatButtonActionPerformed(evt);
-            }
-        });
-
         Chat.setColumns(20);
         Chat.setRows(5);
+        Chat.setFocusable(false);
         jScrollPane2.setViewportView(Chat);
 
         Message.setText("Message");
@@ -474,6 +499,11 @@ public class MainWindow extends javax.swing.JFrame {
         ChangeTimeB.setText("Изменить время заказа");
 
         ChangeStatus.setText("Изменить статус");
+        ChangeStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeStatusActionPerformed(evt);
+            }
+        });
 
         NewStatusH.setText("Новый статус:");
 
@@ -500,11 +530,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(CanselMyCar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
-                        .addComponent(MyCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MyCarModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(MyCarStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         MyCarWindowLayout.setVerticalGroup(
@@ -514,68 +542,25 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(CanselMyCar)
                 .addGap(4, 4, 4)
                 .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(MyCarWindowLayout.createSequentialGroup()
                         .addComponent(MyCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ChatButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ChatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChangeTimeB)
-                    .addComponent(NewStatusH)
-                    .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeStatus))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MyCarWindowLayout.createSequentialGroup()
+                                .addComponent(ChatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 40, Short.MAX_VALUE))
+                            .addGroup(MyCarWindowLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ChangeTimeB)
+                                    .addComponent(NewStatusH)
+                                    .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ChangeStatus))
+                                .addContainerGap())))
+                    .addGroup(MyCarWindowLayout.createSequentialGroup()
+                        .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
-
-        OpenThisOrder1.setText("Открыть");
-
-        jTextField2.setText("Заказ");
-
-        Status1.setText("Статус");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
-                .addComponent(Status1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OpenThisOrder1)
-                .addGap(14, 14, 14))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OpenThisOrder1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Status1))
-                .addGap(107, 107, 107))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        Clients.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Клиент 1", "Клиент 2", "Клиент 3" }));
 
         CanselOrders.setText("Назад");
         CanselOrders.addActionListener(new java.awt.event.ActionListener() {
@@ -584,29 +569,73 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        AllCars.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Номер клиента", "Никнейм", "Модель машины", "Номер машины"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(AllCars);
+
+        OpenOrder.setText("Открыть заказ");
+        OpenOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpenOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout OrdersLayout = new javax.swing.GroupLayout(Orders);
         Orders.setLayout(OrdersLayout);
         OrdersLayout.setHorizontalGroup(
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(OrdersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Clients, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CanselOrders)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CanselOrders, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Clients, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OpenOrder, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         OrdersLayout.setVerticalGroup(
             OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrdersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Clients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CanselOrders))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(OrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(OrdersLayout.createSequentialGroup()
+                        .addComponent(CanselOrders)
+                        .addGap(18, 18, 18)
+                        .addComponent(Clients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OpenOrder)))
+                .addGap(62, 62, 62))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -892,8 +921,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void AutorizationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AutorizationButtonActionPerformed
         Autorization.setVisible(true);
-        TimeTable.setVisible(false);
-        
+        TimeTable.setVisible(false);        
     }//GEN-LAST:event_AutorizationButtonActionPerformed
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
@@ -916,7 +944,7 @@ public class MainWindow extends javax.swing.JFrame {
             PassWind.setText("");
         }
         SetVisionButton(_root);
-        
+        UpdateInfo();
     }//GEN-LAST:event_SendActionPerformed
 
     private void CanselAutorizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanselAutorizationActionPerformed
@@ -927,8 +955,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void MyOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyOrdersActionPerformed
         Orders.setVisible(true);
         
-        if (_root == 2 ) CI.OpenMyClients();
-        if (_root == 3 ) CI.OpenMyClients();
         // Куда-то это деть потом
         TimeTable.setVisible(false);
     }//GEN-LAST:event_MyOrdersActionPerformed
@@ -942,12 +968,20 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AllUsersActionPerformed
 
     private void MyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCarActionPerformed
+        
+        if (_root > 1) {            
+                ChangeTimeB.setVisible(false);
+                ChangeStatus.setVisible(false);
+                NewStatusH.setVisible(false);
+                NewOrderStatus.setVisible(false);
+        }
+        
         MyCarWindow.setVisible(true);
         
-        ModelCar = CI.GetMyCar();
-        StringTokenizer stok = new StringTokenizer(ModelCar, " ");
+        temp = CI.GetMyCar();
+        StringTokenizer stok = new StringTokenizer(temp, " ");
         MyCarModel.setText(stok.nextToken() + " " + stok.nextToken());
-        MyCarStatus.setText(stok.nextToken());
+        MyCarStatus.setText(stok.nextToken("\r?\n"));
                 
         TimeTable.setVisible(false);
     }//GEN-LAST:event_MyCarActionPerformed
@@ -977,18 +1011,17 @@ public class MainWindow extends javax.swing.JFrame {
         else RegistrationStatus.setText("Пароли не совпадают");
     }//GEN-LAST:event_SentForRegistrationActionPerformed
 
-    private void ChatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChatButtonActionPerformed
-        ChatPanel.setVisible(true);
-        
-        answ = CI.OpenChat();
-        
-        Chat.setText(answ);
-    }//GEN-LAST:event_ChatButtonActionPerformed
-
     private void CanselMyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanselMyCarActionPerformed
+        
+        if (_root > 1) {            
+                ChangeTimeB.setVisible(true);
+                ChangeStatus.setVisible(true);
+                NewStatusH.setVisible(true);
+                NewOrderStatus.setVisible(true);
+                CI.RemoveIdRec();
+        }        
         MyCarWindow.setVisible(false);
         TimeTable.setVisible(true);
-        ChatPanel.setVisible(false);
     }//GEN-LAST:event_CanselMyCarActionPerformed
 
     private void SendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendMessageActionPerformed
@@ -997,6 +1030,31 @@ public class MainWindow extends javax.swing.JFrame {
             Chat.setText(answ);
         }
     }//GEN-LAST:event_SendMessageActionPerformed
+
+    private void OpenOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenOrderActionPerformed
+        int id = 0;
+        for (int i = 0;i < 10; i++) {
+            if (AllCars.getValueAt(i, 1).equals(Clients.getItemAt(Clients.getSelectedIndex()))) {
+                id = Integer.parseInt((String) AllCars.getValueAt(i,0));
+                break;
+            }
+        // id нужного нам пользователя
+        }
+        
+        answ = CI.OpenRecord(id);
+                        
+        MyCarWindow.setVisible(true);
+        
+        StringTokenizer stok = new StringTokenizer(answ, " ");
+        MyCarModel.setText(stok.nextToken() + " " + stok.nextToken());
+        MyCarStatus.setText(stok.nextToken("\r?\n"));
+                
+        Orders.setVisible(false);        
+    }//GEN-LAST:event_OpenOrderActionPerformed
+
+    private void ChangeStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeStatusActionPerformed
+        CI.ChangeStatus(NewOrderStatus.getText());
+    }//GEN-LAST:event_ChangeStatusActionPerformed
 
     private void SetVisionButton(int root){
         switch (root){
@@ -1108,6 +1166,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AllCars;
     private javax.swing.JButton AllUsers;
     private javax.swing.JPanel Autorization;
     private javax.swing.JButton AutorizationButton;
@@ -1121,7 +1180,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton ChangeStatus;
     private javax.swing.JButton ChangeTimeB;
     private javax.swing.JTextArea Chat;
-    private javax.swing.JButton ChatButton;
     private javax.swing.JPanel ChatPanel;
     private javax.swing.JComboBox<String> ChooseUser;
     private javax.swing.JComboBox<String> Clients;
@@ -1142,7 +1200,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton MyOrders;
     private javax.swing.JTextField NewOrderStatus;
     private javax.swing.JLabel NewStatusH;
-    private javax.swing.JButton OpenThisOrder1;
+    private javax.swing.JButton OpenOrder;
     private javax.swing.JPanel Orders;
     private javax.swing.JLabel PassH;
     private javax.swing.JLabel PassHelp;
@@ -1161,18 +1219,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton SendMessage;
     private javax.swing.JButton SentForRegistration;
     private javax.swing.JButton SetManager;
-    private javax.swing.JLabel Status1;
     private javax.swing.JTable Table1;
     private javax.swing.JTable Table2;
     private javax.swing.JPanel TimeTable;
     private javax.swing.JPanel Users;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

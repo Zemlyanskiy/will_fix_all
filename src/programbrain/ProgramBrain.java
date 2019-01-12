@@ -1,49 +1,42 @@
 package programbrain;
-import server.*;
-import client.*;
 
-import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class ProgramBrain {
 
-    //  Database credentials
-    static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/will_fix_all";
-    static final String USER = "postgres";
-    static final String PASS = "0000";
+    // Database credentials
+    static final String DB_URL = "jdbc:postgresql://manny.db.elephantsql.com:5432/gelqajsy";
+    static final String USER = "gelqajsy";
+    static final String PASS = "RWybXei9YWXS7t_Vk7bHdFI_fCq7dHdg";
 
     public static void main(String[] argv) {
-
-        System.out.println("Testing connection to PostgreSQL JDBC");
-
         try {
             Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-            e.printStackTrace();
-            return;
+        } catch (java.lang.ClassNotFoundException e) {
+            System.out.println(e.getMessage());
         }
 
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-        Connection connection = null;
+        String url = "jdbc:postgresql://host:port/database";
+        String username = "database";
+        String password = "password";
 
         try {
-            connection = DriverManager
-                    .getConnection(DB_URL, USER, PASS);
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
-            e.printStackTrace();
-            return;
-        }
-
-        if (connection != null) {
-            System.out.println("You successfully connected to database now");
-        } else {
-            System.out.println("Failed to make connection to database");
+            Connection db = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM people");
+            while (rs.next()) {
+                System.out.print("Column 1 returned ");
+                System.out.println(rs.getString(2));
+                System.out.print("Column 2 returned ");
+                System.out.println(rs.getString(3));
+            }
+            rs.close();
+            st.close();
+        } catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
-
 }

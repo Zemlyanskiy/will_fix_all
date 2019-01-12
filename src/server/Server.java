@@ -24,7 +24,7 @@ public class Server implements ServerInterface{
         // ok. We have user's root in our table. We send this root to client
         // or we will user_id + root 
         // id_user + root
-        answer = "4 1";
+        answer = "4 2";
         return answer;
     }
     
@@ -47,7 +47,7 @@ public class Server implements ServerInterface{
     @Override
     public String SendRecordInfo(int id_rec) {
         //  Must return model number status
-        answer = "toyota r367vo 0";
+        answer = "toyota r367vo wait for diagnostic";
         return answer;
     }
 
@@ -77,8 +77,6 @@ public class Server implements ServerInterface{
         else Chat+= "1";
         Chat += message + "\n";
         
-        System.out.println(Chat);
-        
         return true;
     }
     
@@ -86,8 +84,8 @@ public class Server implements ServerInterface{
 
     @Override
     public String SendClientsInfoToManager(int id_manager) {
-        // Must return iserid orderid login, userid orderid login
-        answer = "1 1 username1 2 3 username2";
+        // Must return orderid login CarModel CarNumber, orderid login CarModel CarNumber
+        answer = "1 username1 Lada e228ye 2 username2 Toyota e007uu 3 username3 Lada e228ye 4 username4 Toyota e007uu 5 username5 Lada e228ye 6 username6 Toyota e007uu";
         return answer;
     }
 
