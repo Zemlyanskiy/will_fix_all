@@ -1,6 +1,7 @@
 package programbrain;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import org.postgresql.jdbc2.optional.ConnectionPool;
 
@@ -8,6 +9,8 @@ import java.sql.*;
 >>>>>>> Connect success, add interface to override procedures
 =======
 >>>>>>> Resolve conflicts with travis
+=======
+>>>>>>> ab86a45152114cfbe2554dd4941509c16c48a16b
 import java.io.PrintWriter;
 
 import static java.lang.System.out;
@@ -15,6 +18,7 @@ import static java.lang.System.out;
 public class Procedure implements ProcedureInterface {
     @Override
     public void ReadChat(int userId, PrintWriter refCursor) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         
@@ -63,6 +67,9 @@ public class Procedure implements ProcedureInterface {
 =======
         
 >>>>>>> Resolve conflicts with team reviewing
+=======
+        
+>>>>>>> ab86a45152114cfbe2554dd4941509c16c48a16b
     }
 
     @Override
