@@ -1,23 +1,25 @@
 package client;
 
-enum root {client, manager, admin};
-
 public interface ClientInterface {
-
-    root GetStatus();
+    
+    int GetStatus();
 
     boolean Registration(String Login, String pass);
 
     int Autorization(String Login, String pass);
 
-    void UpdateCalendar();
+    String UpdateCalendar();
 
-    void GetMyCar();
+    String GetMyCar();
 
     void OpenRecord(int id_rec);
 
-    void ToBookATime(int time);
+    void ToBookATime(String str);
 
+    String OpenChat();
+    
+    boolean SendMessage(String message);
+    
     // Manager
 
     void OpenMyClients();

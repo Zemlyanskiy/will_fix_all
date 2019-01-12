@@ -3,16 +3,20 @@ package server;
 public interface ServerInterface {
 
     String Registration(String Login, String pass);
-
+    // return true or false
     String Autorization(String Login, String pass);
-
+    // return user_root
     String SendCalendar();
 
     String SendCarInfo(int id_rec);
 
     String SendRecordInfo(int id_rec);
 
-    String ToBookATime(int id_rec, int time);
+    boolean ToBookATime(int id_rec, String time);
+    
+    String SendChat(int id_rec);
+    
+    boolean AddMessage(String message, int id_rec, int root);
     
     // Manager
 

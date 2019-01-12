@@ -2,8 +2,14 @@ package server;
 
 public class Server implements ServerInterface{
     private String answer;
-
-    public Server(){};
+    private String Chat;
+    
+    private String table;
+    
+    public Server(){
+        Chat = "0 Hello, Happy New Year!\n1 Hello, Happy New Year too!\n";
+        table = "100101 1 110101 1 120101 0";
+    };
 
     @Override
     public String Registration(String Login, String pass) {
@@ -15,7 +21,10 @@ public class Server implements ServerInterface{
     @Override
     public String Autorization(String Login, String pass) {
         // Must return true or false
-        answer = "true";
+        // ok. We have user's root in our table. We send this root to client
+        // or we will user_id + root 
+        // id_user + root
+        answer = "4 1";
         return answer;
     }
     
@@ -24,14 +33,14 @@ public class Server implements ServerInterface{
         // Must return calendar status
         // hhddmm (status 0 1) hhddmm (status 0 1) .... all entries
         // 100101 - 10:00 01 january
-        answer = "100101 1 110101 1 120101 0";
+        answer = table;
         return answer;
     }
         
     @Override
     public String SendCarInfo(int id_rec) {
         //  Must return model number status
-        answer = "lada r367vo 0";
+        answer = "lada r367vo ready";
         return answer;
     }
 
@@ -43,13 +52,36 @@ public class Server implements ServerInterface{
     }
 
     @Override
-    public String ToBookATime(int id_rec, int time) {
+    public boolean ToBookATime(int id_rec, String time) {
         // Time is hhddmm  (101201 - 10:00 12 january)
         // Must return true or false
-        answer = "true";
-        return answer;
+        time += " 1";        
+        
+        table += " " + time;
+        
+        return true;
     }
 
+    @Override
+    public String SendChat(int id_rec) {
+        answer = Chat;
+        
+        return answer;
+    }
+    
+    @Override
+    public boolean AddMessage(String message, int id_rec, int root) {
+        if ((root < 1) || (root > 3)) return false;
+        if (root == 1)
+            Chat+= "0";
+        else Chat+= "1";
+        Chat += message + "\n";
+        
+        System.out.println(Chat);
+        
+        return true;
+    }
+    
     // Manager
 
     @Override
@@ -102,4 +134,8 @@ public class Server implements ServerInterface{
         answer = "username1 1 username2 2";
         return answer;
     }
+
+    
+
+    
 }

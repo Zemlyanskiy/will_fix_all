@@ -3,7 +3,6 @@ package communication;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.BeforeClass;
-import static org.junit.Assert.*;
 
 import server.*;
 import client.*;
@@ -43,31 +42,31 @@ public class ClientServerCommunicationTest {
     @Test
     public void UserAutorizationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        int answer = speaker.Autorization("UserLogin", "UserPassword");
+        String answer = speaker.Autorization("UserLogin", "UserPassword");
 
-        Assert.assertEquals(answer, 1);
+        Assert.assertEquals(answer, "1");
     }
 
     @Test
     public void ManagerAutorizationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        int answer = speaker.Autorization("ManagerLogin", "ManagerPassword");
+        String answer = speaker.Autorization("ManagerLogin", "ManagerPassword");
 
-        Assert.assertEquals(answer, 2);
+        Assert.assertEquals(answer, "2");
     }
 
     @Test
     public void AdminAutorizationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        int answer = speaker.Autorization("AdminLogin", "AdminPassword");
-
-        Assert.assertEquals(answer, 3);
+        String answer = speaker.Autorization("AdminLogin", "AdminPassword");
+        //Assert.assertTrue(answer.equalsIgnoreCase("3"));
+        Assert.assertEquals(answer, "3");
     }
 
     @Test
     public void FailAutorizationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        int answer = speaker.Autorization("FailLogin", "FailPassword");
+        String answer = speaker.Autorization("FailLogin", "FailPassword");
 
         Assert.assertEquals(answer, 0);
     }
@@ -120,7 +119,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void SuccessToBookATimeTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.ToBookATime( 1, 101010 );
+        boolean answer = speaker.ToBookATime( 1, "101010" );
 
         Assert.assertTrue(answer);
     }
@@ -128,7 +127,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void FailToBookATimeTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.ToBookATime( 1, 100000 );
+        boolean answer = speaker.ToBookATime( 1, "100000" );
 
         Assert.assertFalse(answer);
     }

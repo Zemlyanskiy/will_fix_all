@@ -3,8 +3,6 @@ package server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.StringTokenizer;
 
 public class ServerSpeaker extends Thread {
@@ -81,14 +79,33 @@ public class ServerSpeaker extends Thread {
                     }
                     case "ToBookATime": {
                         int id_rec = Integer.parseInt(stok.nextToken());
-                        int time = Integer.parseInt(stok.nextToken());
-                        answer = ServInt.ToBookATime(id_rec, time);
+                        String time = stok.nextToken();
+                        System.out.println(time);
+                        
+                        _dos.writeBoolean(ServInt.ToBookATime(id_rec, time));
+                        _dos.flush();
+                        
+                        break;
+                    }
+
+                    case "GetChat" : {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        answer = ServInt.SendChat(id_rec);
 
                         _dos.writeUTF(answer);
                         _dos.flush();
                         break;
                     }
-
+                    
+                    case "AddMessage": {
+                        int id_rec = Integer.parseInt(stok.nextToken());
+                        int root = Integer.parseInt(stok.nextToken());
+                        command = stok.nextToken("\n");
+                        
+                        _dos.writeBoolean(ServInt.AddMessage(command, id_rec, root));            
+                        break;
+                    }
+                    
                     // Manager
 
                     case "GetMyClientsInfo": {

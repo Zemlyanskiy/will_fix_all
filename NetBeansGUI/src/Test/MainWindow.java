@@ -5,32 +5,42 @@
  */
 package Test;
 
+import client.Calendar;
 import client.Client;
 import client.ClientInterface;
+import java.awt.Color;
 import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Umlore
  */
-public class Test extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
     private ClientInterface CI;
-    
+    private Calendar calend;
+            
     private int _root;
     private String ModelCar;
+    private String answ;
+    
+    boolean flag;
     /**
      * Creates new form Test
      */
-    public Test() {
+    public MainWindow() {
         try {
-            CI = new Client();
+            int port = 1234;
+            String host = "localhost";
+            CI = new Client(host,port);
         } catch (IOException ex) {
             System.out.println("Не создал Клиента\n Test()");
-        }
-        ModelCar = "Lada";
+        }        
+        flag = false;
         _root = 0;
         initComponents();
         MyCar.setVisible(false);
@@ -43,8 +53,63 @@ public class Test extends javax.swing.JFrame {
         MyCarWindow.setVisible(false);
         ChatPanel.setVisible(false);
         RegistrationPanel.setVisible(false);
+        
+        EmptyDate.setVisible(false);
+        Help.setVisible(false);
+        Reserved.setVisible(false);
+        
+        calend = new Calendar(this);
+        calend.start();
     }
 
+    public void UpdateCalendar(){
+        SetCalendar(CI.UpdateCalendar());
+    }
+    
+    private void SetCalendar(String calendar){
+        
+        if (!flag){
+            for (int i = 0; i < 7; i++) {
+                Table1.setValueAt((i+1) + " января", 0, i);
+                Table2.setValueAt((i+8) + " января", 0, i);
+            }
+            flag = true;
+        }
+        
+        EmptyDate.removeAllItems();
+        
+        StringTokenizer stok = new StringTokenizer(calendar, " ");
+        String date;
+        String str = "";
+        String newS = "";
+        while (stok.hasMoreTokens()) {
+            date = stok.nextToken();
+            str = date.substring(2,4);
+                        
+            if (Integer.parseInt(str) < 8 ) {
+                newS = stok.nextToken();
+                if (newS.equalsIgnoreCase("0")) {
+                    Table1.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                    EmptyDate.addItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
+                }
+                if (newS.equalsIgnoreCase("1")) {
+                    Table1.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                }
+            }
+            else {
+                newS = stok.nextToken();
+                if (newS.equalsIgnoreCase("0")) {
+                    Table2.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                    EmptyDate.addItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
+                }
+                if (newS.equalsIgnoreCase("1")) {
+                    Table2.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                }
+            }            
+        }
+        if (EmptyDate.getItemCount() == 0) EmptyDate.addItem("Свободного времени нет");
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,13 +124,14 @@ public class Test extends javax.swing.JFrame {
         Registration = new javax.swing.JButton();
         AutorizationButton = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
-        jTable2 = new javax.swing.JTable();
-        jTable3 = new javax.swing.JTable();
+        Table1 = new javax.swing.JTable();
+        Table2 = new javax.swing.JTable();
         Reserved = new javax.swing.JButton();
         Help = new javax.swing.JLabel();
         MyCar = new javax.swing.JButton();
         MyOrders = new javax.swing.JButton();
         AllUsers = new javax.swing.JButton();
+        EmptyDate = new javax.swing.JComboBox<>();
         Autorization = new javax.swing.JPanel();
         Send = new javax.swing.JButton();
         LoginWind = new javax.swing.JTextField();
@@ -152,7 +218,7 @@ public class Test extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -186,10 +252,10 @@ public class Test extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setColumnSelectionAllowed(true);
-        jTable2.getTableHeader().setReorderingAllowed(false);
+        Table1.setColumnSelectionAllowed(true);
+        Table1.getTableHeader().setReorderingAllowed(false);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        Table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -223,8 +289,8 @@ public class Test extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setColumnSelectionAllowed(true);
-        jTable3.getTableHeader().setReorderingAllowed(false);
+        Table2.setColumnSelectionAllowed(true);
+        Table2.getTableHeader().setReorderingAllowed(false);
 
         Reserved.setBackground(new java.awt.Color(100, 200, 100));
         Reserved.setText("Зарезервировать время");
@@ -265,33 +331,30 @@ public class Test extends javax.swing.JFrame {
         TimeTableLayout.setHorizontalGroup(
             TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TimeTableLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TimeTableLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TimeTableLayout.createSequentialGroup()
-                                .addComponent(MyCar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(MyOrders)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AllUsers)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addComponent(Exit)
-                                .addGap(2, 2, 2)
-                                .addComponent(AutorizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(Registration))
-                            .addGroup(TimeTableLayout.createSequentialGroup()
-                                .addGroup(TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTable3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                                    .addComponent(jTable2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(TimeTableLayout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(Help)
+                        .addComponent(MyCar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Reserved, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(MyOrders)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AllUsers)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(Exit)
+                        .addGap(2, 2, 2)
+                        .addComponent(AutorizationButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(Registration))
+                    .addGroup(TimeTableLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(Help)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EmptyDate, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Reserved, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addComponent(Table2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Table1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         TimeTableLayout.setVerticalGroup(
             TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,13 +367,14 @@ public class Test extends javax.swing.JFrame {
                     .addComponent(MyOrders)
                     .addComponent(AllUsers))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTable2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Table1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTable3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Table2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TimeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Reserved)
-                    .addComponent(Help))
+                    .addComponent(Help)
+                    .addComponent(EmptyDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
@@ -375,6 +439,11 @@ public class Test extends javax.swing.JFrame {
         Message.setText("Message");
 
         SendMessage.setText("Отправить");
+        SendMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendMessageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ChatPanelLayout = new javax.swing.GroupLayout(ChatPanel);
         ChatPanel.setLayout(ChatPanelLayout);
@@ -433,7 +502,7 @@ public class Test extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
                         .addComponent(MyCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(MyCarStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addComponent(MyCarStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -833,7 +902,7 @@ public class Test extends javax.swing.JFrame {
 
     private void ReservedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservedActionPerformed
         
-        CI.ToBookATime(10);
+        CI.ToBookATime(EmptyDate.getItemAt(EmptyDate.getSelectedIndex()));
         // Изменить параметр в скором времени
     }//GEN-LAST:event_ReservedActionPerformed
 
@@ -859,7 +928,7 @@ public class Test extends javax.swing.JFrame {
         Orders.setVisible(true);
         
         if (_root == 2 ) CI.OpenMyClients();
-        if (_root == 3 ) CI.GetAllClient();
+        if (_root == 3 ) CI.OpenMyClients();
         // Куда-то это деть потом
         TimeTable.setVisible(false);
     }//GEN-LAST:event_MyOrdersActionPerformed
@@ -875,8 +944,11 @@ public class Test extends javax.swing.JFrame {
     private void MyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCarActionPerformed
         MyCarWindow.setVisible(true);
         
-        CI.GetMyCar();
-        // Куда-то это деть потом
+        ModelCar = CI.GetMyCar();
+        StringTokenizer stok = new StringTokenizer(ModelCar, " ");
+        MyCarModel.setText(stok.nextToken() + " " + stok.nextToken());
+        MyCarStatus.setText(stok.nextToken());
+                
         TimeTable.setVisible(false);
     }//GEN-LAST:event_MyCarActionPerformed
 
@@ -908,8 +980,9 @@ public class Test extends javax.swing.JFrame {
     private void ChatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChatButtonActionPerformed
         ChatPanel.setVisible(true);
         
-        CI.OpenChat(_root);
+        answ = CI.OpenChat();
         
+        Chat.setText(answ);
     }//GEN-LAST:event_ChatButtonActionPerformed
 
     private void CanselMyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanselMyCarActionPerformed
@@ -917,6 +990,13 @@ public class Test extends javax.swing.JFrame {
         TimeTable.setVisible(true);
         ChatPanel.setVisible(false);
     }//GEN-LAST:event_CanselMyCarActionPerformed
+
+    private void SendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendMessageActionPerformed
+        if (CI.SendMessage(Message.getText())) {
+            answ = CI.OpenChat();        
+            Chat.setText(answ);
+        }
+    }//GEN-LAST:event_SendMessageActionPerformed
 
     private void SetVisionButton(int root){
         switch (root){
@@ -927,6 +1007,10 @@ public class Test extends javax.swing.JFrame {
                 MyCar.setVisible(false);
                 MyOrders.setVisible(false);
                 AllUsers.setVisible(false);
+                
+                EmptyDate.setVisible(false);
+                Help.setVisible(false);
+                Reserved.setVisible(false);
                 break;
             }
             case 1: {
@@ -942,6 +1026,11 @@ public class Test extends javax.swing.JFrame {
                 NewStatusH.setVisible(false);
                 NewOrderStatus.setVisible(false);
                 Autorization.setVisible(false);
+                
+                EmptyDate.setVisible(true);
+                Help.setVisible(true);
+                Reserved.setVisible(true);
+                
                 break;
             }
             case 2: {
@@ -953,6 +1042,11 @@ public class Test extends javax.swing.JFrame {
                 AutorizationButton.setVisible(false);
                 Registration.setVisible(false);                
                 Autorization.setVisible(false);
+                
+                EmptyDate.setVisible(true);
+                Help.setVisible(true);
+                Reserved.setVisible(true);
+                
                 break;
             }
             case 3: {
@@ -964,6 +1058,11 @@ public class Test extends javax.swing.JFrame {
                 AutorizationButton.setVisible(false);
                 Registration.setVisible(false);                
                 Autorization.setVisible(false);
+                
+                EmptyDate.setVisible(true);
+                Help.setVisible(true);
+                Reserved.setVisible(true);
+                
                 break; 
             }
             default: {
@@ -989,20 +1088,21 @@ public class Test extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Test().setVisible(true);
+                new MainWindow().setVisible(true);
             }
         });
     }
@@ -1027,6 +1127,7 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Clients;
     private javax.swing.JButton DeleteManager;
     private javax.swing.JLabel EmailH;
+    private javax.swing.JComboBox<String> EmptyDate;
     private javax.swing.JButton Exit;
     private javax.swing.JLabel Help;
     private javax.swing.JLayeredPane Levels;
@@ -1061,6 +1162,8 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JButton SentForRegistration;
     private javax.swing.JButton SetManager;
     private javax.swing.JLabel Status1;
+    private javax.swing.JTable Table1;
+    private javax.swing.JTable Table2;
     private javax.swing.JPanel TimeTable;
     private javax.swing.JPanel Users;
     private javax.swing.JLabel jLabel1;
@@ -1070,8 +1173,6 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

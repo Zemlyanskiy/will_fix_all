@@ -39,6 +39,7 @@
     <include name="*.ane"/>
     <include name="*.jar"/>
     <include name="*.ear"/>
+    <include name="*.klib"/>
   </patternset>
   <patternset id="compiler.resources">
     <exclude name="**/?*.java"/>
@@ -51,6 +52,17 @@
     <exclude name="**/?*.clj"/>
     <exclude name="**/?*.aj"/>
   </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.mysql-connector-java-5.1.42.classpath">
+    <pathelement location="${basedir}/lib/mysql-connector-java-5.1.42.jar"/>
+  </path>
+  
+  <path id="library.postgresql-42.2.5.classpath">
+    <pathelement location="${basedir}/lib/postgresql-42.2.5.jar"/>
+  </path>
   
   <!-- Modules -->
   
@@ -70,16 +82,23 @@
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
   
-  <path id="will_fix_all.module.production.classpath"/>
+  <path id="will_fix_all.module.production.classpath">
+    <path refid="library.mysql-connector-java-5.1.42.classpath"/>
+    <path refid="library.postgresql-42.2.5.classpath"/>
+  </path>
   
   <path id="will_fix_all.runtime.production.module.classpath">
     <pathelement location="${will_fix_all.output.dir}"/>
+    <path refid="library.mysql-connector-java-5.1.42.classpath"/>
+    <path refid="library.postgresql-42.2.5.classpath"/>
   </path>
   
   <path id="will_fix_all.module.classpath">
     <pathelement location="${will_fix_all.output.dir}"/>
     <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
     <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+    <path refid="library.mysql-connector-java-5.1.42.classpath"/>
+    <path refid="library.postgresql-42.2.5.classpath"/>
   </path>
   
   <path id="will_fix_all.runtime.module.classpath">
@@ -87,6 +106,8 @@
     <pathelement location="${will_fix_all.output.dir}"/>
     <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
     <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+    <path refid="library.mysql-connector-java-5.1.42.classpath"/>
+    <path refid="library.postgresql-42.2.5.classpath"/>
   </path>
   
   
@@ -102,6 +123,7 @@
     <dirset dir="${module.will_fix_all.basedir}">
       <include name="lib"/>
       <include name="src"/>
+      <include name="NetBeansGUI/src"/>
     </dirset>
   </path>
   
@@ -130,6 +152,10 @@
         <type type="file"/>
       </fileset>
       <fileset dir="${module.will_fix_all.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.will_fix_all.basedir}/NetBeansGUI/src">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
       </fileset>

@@ -1,20 +1,27 @@
 package client;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client implements ClientInterface{
 
-    private root Status;
+    private int Status;
     private int id;
+    private int id_rec;         // if it's manager. we must remember his client
     private ClientSpeaker CS;
-
+    
+    private String answer;
+    
     public Client(String _host, int _port) throws IOException {
         CS = new ClientSpeaker(_host, _port);
         id = 0;
+        id_rec = 0;
     }
 
     @Override
-    public root GetStatus(){
+    public int GetStatus(){
         return Status;
     }
 
@@ -31,8 +38,11 @@ public class Client implements ClientInterface{
     @Override
     public int Autorization(String Login, String pass) {
         try {
-            id = CS.Autorization(Login, pass);
-            return id;
+            answer = CS.Autorization(Login, pass);
+            StringTokenizer stok = new StringTokenizer(answer, " ");
+            id = Integer.parseInt(stok.nextToken());
+            Status = Integer.parseInt(stok.nextToken());
+            return Status;
         } catch (IOException ex) {
             System.out.println("Error Client.Autorization()");
             return 0;
@@ -40,22 +50,24 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void UpdateCalendar() {
+    public String UpdateCalendar() {
         try {
-            CS.GetCalendar();
+            return CS.GetCalendar();
         } catch (IOException ex) {
             System.out.println("Client.UpdateCalendar() ERROR");
+            return "";
         }
     }
 
     @Override
-    public void GetMyCar() {
+    public String GetMyCar() {
         try {
-            CS.GetCarInfo(id);
+            return CS.GetCarInfo(id);
             //return CS.GetMyCar(id);
         } catch (IOException ex) {
             System.out.println("Client.GetMyCar() ERROR");
         }
+        return "Connection error Connection_Error";
     }
 
     @Override
@@ -68,15 +80,37 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void ToBookATime(int time) {
+    public void ToBookATime(String str) {
         try {
-            CS.ToBookATime(id, time);
-            // CS.ToBookATime(id, int);
+            System.out.println(CS.ToBookATime(id, str));
         } catch (IOException ex) {
             System.out.println("Client.ToBookTime() ERROR");
         }
     }
 
+    @Override
+    public String OpenChat() {
+        try {
+            return CS.GetChat(id);
+        } catch (IOException ex) {
+            System.out.println("Client.OpenChat() ERROR");
+            return "Connection Error";
+        }        
+    }
+    
+    
+    @Override
+    public boolean SendMessage(String message) {
+        try {
+            message += "\n";
+            if (id_rec == 0) return CS.SendMessage(message, id, Status);
+            return CS.SendMessage(message, id_rec, Status);
+        } catch (IOException ex) {
+            System.out.println("Client.SendMessage() ERROR. Can't send message!");
+            return false;
+        }
+    }
+    
     // Manager
 
     @Override
@@ -143,5 +177,9 @@ public class Client implements ClientInterface{
             System.out.println("Client.OpenAllUsers() ERROR");
         }
     }
+
+
+    
+
 
 }

@@ -132,42 +132,35 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="MyCar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="MyCar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="MyOrders" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="AllUsers" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="18" max="32767" attributes="0"/>
-                                      <Component id="Exit" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                      <Component id="AutorizationButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                      <Component id="Registration" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jTable3" alignment="0" pref="630" max="32767" attributes="0"/>
-                                          <Component id="jTable2" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="MyOrders" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="AllUsers" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <Component id="Exit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <Component id="AutorizationButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <Component id="Registration" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="Help" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="EmptyDate" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Reserved" min="-2" pref="190" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="Table2" max="32767" attributes="0"/>
+                  <Component id="Table1" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -182,13 +175,14 @@
                           <Component id="AllUsers" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTable2" min="-2" pref="192" max="-2" attributes="0"/>
+                      <Component id="Table1" min="-2" pref="192" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTable3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Table2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Reserved" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Help" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EmptyDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
@@ -243,7 +237,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTable" name="jTable2">
+            <Component class="javax.swing.JTable" name="Table1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="12">
@@ -262,7 +256,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTable" name="jTable3">
+            <Component class="javax.swing.JTable" name="Table2">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="12">
@@ -329,6 +323,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AllUsersActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="EmptyDate">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -426,7 +430,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="MyCarModel" min="-2" pref="217" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="MyCarStatus" pref="227" max="32767" attributes="0"/>
+                              <Component id="MyCarStatus" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="ChatButton" min="-2" pref="189" max="-2" attributes="0"/>
                           </Group>
@@ -555,6 +559,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x41e;&#x442;&#x43f;&#x440;&#x430;&#x432;&#x438;&#x442;&#x44c;"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SendMessageActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

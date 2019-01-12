@@ -59,13 +59,22 @@ public class FakeServer implements ServerInterface {
     }
 
     @Override
-    public String ToBookATime(int id_rec, int time) {
+    public String SendChat(int id_rec) {
+        return null;
+    }
+
+    @Override
+    public boolean AddMessage(String message, int id_rec, int root) {
+        return false;
+    }
+
+    @Override
+    public boolean ToBookATime(int id_rec, String time) {
         // Wrong or booked time
-        if (time == 100000)
-            answer = "false";
+        if (time.equalsIgnoreCase("100000"))
+            return true;
         else
-            answer = "true";
-        return answer;
+            return false;
     }
 
     // Manager

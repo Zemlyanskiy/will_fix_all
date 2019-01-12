@@ -11,7 +11,7 @@ public class ClientSpeaker {
     private DataOutputStream _dos;
 
     private String command;
-
+    
     public ClientSpeaker(String _host, int _port) throws IOException {
         server = new Socket(_host, _port);
 
@@ -29,14 +29,14 @@ public class ClientSpeaker {
         return Boolean.parseBoolean(_dis.readUTF());
     }
 
-    public int Autorization(String Login, String pass) throws IOException {
+    public String Autorization(String Login, String pass) throws IOException {
 
         command = "Autorization " + Login + ' ' + pass;
         _dos.writeUTF(command);
         _dos.flush();
 
         // Permissions (0 - nobody, 1 - client, 2 -manager, 3 -admin), Login
-        return Integer.parseInt(_dis.readUTF());
+        return _dis.readUTF();
     }
 
     public String GetCalendar() throws IOException {
@@ -69,16 +69,36 @@ public class ClientSpeaker {
         return _dis.readUTF();
     }
 
-    public boolean ToBookATime(int id_rec, int time) throws IOException {
+    public boolean ToBookATime(int id_rec, String time) throws IOException {
         // Time is hhddmm  (101201 - 10:00 12 january)
-        command = "ToBookATime " + id_rec + ' ' + time;
+        // 10:00 01.01 1
+        command = "ToBookATime " + id_rec + ' ' + time.substring(0, 2) + time.substring(6, 8) + time.substring(9, 11);
+        
+        System.out.println(command);
+        
         _dos.writeUTF(command);
         _dos.flush();
 
         // true/false (BookTime)
-        return Boolean.parseBoolean(_dis.readUTF());
+        return _dis.readBoolean();
     }
 
+    public String GetChat(int id_rec) throws IOException{
+        command = "GetChat " + id_rec;
+        _dos.writeUTF(command);
+        _dos.flush();
+        
+        return _dis.readUTF();
+    }
+    
+    public boolean SendMessage(String message, int id_rec, int root) throws IOException{
+        command = "AddMessage " + id_rec + ' ' + root + ' ' + message;
+        _dos.writeUTF(command);
+        _dos.flush();
+        
+        return _dis.readBoolean();
+    }
+    
     // Manager
 
     public String GetMyClientsInfo(int id_manager) throws IOException{
