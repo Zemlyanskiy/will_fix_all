@@ -1,14 +1,36 @@
 package server;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Server implements ServerInterface{
     private String answer;
     private String Chat;
     
     private String table;
-    
+
+    // Database credentials
+    static final String DB_URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/evejlbgk";
+    static final String USER = "evejlbgk";
+    static final String PASS = "s2q8D9vPB9sa5QJTrgW2DaRU98JRHAjR";
+
+    private Connection db;
+
     public Server(){
         Chat = "0 Hello, Happy New Year!\n1 Hello, Happy New Year too!\n";
         table = "100101 1 110101 1 120101 0";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            db = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
     };
 
     @Override

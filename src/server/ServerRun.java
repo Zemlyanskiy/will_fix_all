@@ -9,7 +9,7 @@ public class ServerRun {
         try {
             SP = new ServerProtocol(1234, new Server());
             SP.start();
-            System.out.println("Сервер запустился!");
+            System.out.println("Server ran!");
         } catch (IOException ex) {
             System.out.println("ServerStart() ERROR");
         }

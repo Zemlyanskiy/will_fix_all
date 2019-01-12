@@ -7,11 +7,10 @@ import java.sql.Statement;
 
 public class ProgramBrain {
 
-    // Database credentials
-    static final String DB_URL = "jdbc:postgresql://manny.db.elephantsql.com:5432/gelqajsy";
-    static final String USER = "gelqajsy";
-    static final String PASS = "RWybXei9YWXS7t_Vk7bHdFI_fCq7dHdg";
-
+    //  Database credentials
+    static final String DB_URL = "jdbc:postgresql://dumbo.db.elephantsql.com:5432/evejlbgk";
+    static final String USER = "evejlbgk";
+    static final String PASS = "s2q8D9vPB9sa5QJTrgW2DaRU98JRHAjR";
     public static void main(String[] argv) {
         try {
             Class.forName("org.postgresql.Driver");
@@ -19,14 +18,10 @@ public class ProgramBrain {
             System.out.println(e.getMessage());
         }
 
-        String url = "jdbc:postgresql://host:port/database";
-        String username = "database";
-        String password = "password";
-
         try {
             Connection db = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM people");
+            ResultSet rs = st.executeQuery("SELECT * FROM pg_user");
             while (rs.next()) {
                 System.out.print("Column 1 returned ");
                 System.out.println(rs.getString(2));
