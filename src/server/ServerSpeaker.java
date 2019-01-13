@@ -3,6 +3,7 @@ package server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 
 public class ServerSpeaker extends Thread {
@@ -34,8 +35,10 @@ public class ServerSpeaker extends Thread {
                     case "Registration": {
                         String Login = stok.nextToken();
                         String pass = stok.nextToken();
+                        String car_model = stok.nextToken();
+                        String car_number = stok.nextToken();
 
-                        answer = ServInt.Registration(Login, pass);
+                        answer = ServInt.Registration(Login, pass, car_model, car_number);
 
                         _dos.writeUTF(answer);
                         _dos.flush();
@@ -183,8 +186,10 @@ public class ServerSpeaker extends Thread {
             } catch (IOException ex) {
                 System.out.println("Connection error!");
                 break;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        }
+       }
     }
 }
 
