@@ -94,9 +94,21 @@ public class Server implements ServerInterface{
     @Override
     public boolean AddMessage(String message, int id_rec, int root) {
         if ((root < 1) || (root > 3)) return false;
-        if (root == 1)
-            Chat+= "0";
-        else Chat+= "1";
+        switch(root){
+            case 1: {
+              Chat+= "0";  
+              break;
+            }
+            case 2: {
+               Chat+= "1";
+               break;
+            }
+            case 3: {
+                Chat+= "2";
+                break;
+            }
+            default: break;
+        }
         Chat += message + "\n";
         
         return true;
@@ -131,6 +143,7 @@ public class Server implements ServerInterface{
     @Override
     public String ChangeManager(int id_rec, int id_manager) {
         // Must return true or false
+        System.out.println("For order " + id_rec + " this manager " + id_manager + " is main now");
         answer = "true";
         return answer;
     }
@@ -138,6 +151,7 @@ public class Server implements ServerInterface{
     @Override
     public String SetManager(int id_user) {
         // Must return true or false
+        System.out.println("User " + id_user + " is manager now/");
         answer = "true";
         return answer;
     }
@@ -145,14 +159,15 @@ public class Server implements ServerInterface{
     @Override
     public String RemoveManager(int id_user) {
         // Must return true or false
+        System.out.println("Remove user " + id_user + " status manager.");
         answer = "true";
         return answer;
     }
 
     @Override
     public String SendAllUsersInfo() {
-        // Must return user id_user user id_user
-        answer = "username1 1 username2 2";
+        // Must return id_user username root_user id_user username root_user
+        answer = "1 username1 1 2 username2 2 3 username3 1 4 username4 2 5 username5 1";
         return answer;
     }
 

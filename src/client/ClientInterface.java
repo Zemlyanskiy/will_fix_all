@@ -32,9 +32,9 @@ public interface ClientInterface {
 
     // Administrator
 
-    void ChangeManager(int id_rec, int id_manager);
+    void ChangeManager(int id_manager);
 
-    void OpenAllUsers();
+    String OpenAllUsers();
 
     void SetManager(int id_user);
 

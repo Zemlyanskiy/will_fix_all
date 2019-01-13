@@ -56,6 +56,9 @@ public class MainWindow extends javax.swing.JFrame {
         Help.setVisible(false);
         Reserved.setVisible(false);
         
+        AllManagers.setVisible(false);
+        ChangeManager.setVisible(false);
+        
         Chat.setText(CI.OpenChat());
         
         calend = new Calendar(this);
@@ -66,6 +69,44 @@ public class MainWindow extends javax.swing.JFrame {
         UpdateCalendar();
         UpdateChat();
         if (_root > 1) UpdateOrders();
+        if (_root > 2) UpdateUsers();
+    }
+    
+    private void UpdateUsers() {
+        answ = CI.OpenAllUsers();
+        
+        String temp2 = "";
+        
+        StringTokenizer stok = new StringTokenizer(answ, " ");
+        int row = 0;
+        
+        ChooseClientUser.removeAllItems();
+        ChooseManagerUser.removeAllItems();
+        
+        while (stok.hasMoreTokens()) {
+            AllUsersTable.setValueAt(stok.nextToken(), row, 0);
+            temp = stok.nextToken();
+            AllUsersTable.setValueAt(temp, row, 1);
+            temp2 = stok.nextToken();
+            AllUsersTable.setValueAt(temp2, row, 2);
+            
+            switch (temp2){
+                case "1": {
+                    ChooseClientUser.addItem(temp);
+                    break;
+                }
+                case "2": {
+                    ChooseManagerUser.addItem(temp);
+                    break;
+                }
+                default: break;
+            }
+            row++;
+        }
+        
+        if (ChooseClientUser.getItemCount() == 0) ChooseClientUser.addItem("У нас нет клиентов (");
+        if (ChooseManagerUser.getItemCount() == 0) ChooseManagerUser.addItem("У нас нет работников");
+        AllManagers.setModel(ChooseManagerUser.getModel());
     }
     
     private void UpdateOrders(){
@@ -187,6 +228,8 @@ public class MainWindow extends javax.swing.JFrame {
         NewStatusH = new javax.swing.JLabel();
         NewOrderStatus = new javax.swing.JTextField();
         EmptyDate2 = new javax.swing.JComboBox<>();
+        ChangeManager = new javax.swing.JButton();
+        AllManagers = new javax.swing.JComboBox<>();
         Orders = new javax.swing.JPanel();
         Clients = new javax.swing.JComboBox<>();
         CanselOrders = new javax.swing.JButton();
@@ -195,12 +238,13 @@ public class MainWindow extends javax.swing.JFrame {
         OpenOrder = new javax.swing.JButton();
         Users = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        AllUsersTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        ChooseUser = new javax.swing.JComboBox<>();
+        ChooseClientUser = new javax.swing.JComboBox<>();
         SetManager = new javax.swing.JButton();
         DeleteManager = new javax.swing.JButton();
         CanselUsers = new javax.swing.JButton();
+        ChooseManagerUser = new javax.swing.JComboBox<>();
         RegistrationPanel = new javax.swing.JPanel();
         LoginH = new javax.swing.JLabel();
         PassH = new javax.swing.JLabel();
@@ -511,18 +555,31 @@ public class MainWindow extends javax.swing.JFrame {
 
         NewOrderStatus.setText("Готово");
 
+        ChangeManager.setText("Сменить менеджера");
+        ChangeManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeManagerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MyCarWindowLayout = new javax.swing.GroupLayout(MyCarWindow);
         MyCarWindow.setLayout(MyCarWindowLayout);
         MyCarWindowLayout.setHorizontalGroup(
             MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ChatPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(MyCarWindowLayout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CanselMyCar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
-                        .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(CanselMyCar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
+                        .addComponent(AllManagers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(MyCarWindowLayout.createSequentialGroup()
+                                .addComponent(ChangeManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(EmptyDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ChangeTimeB))
@@ -560,7 +617,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ChangeTimeB)
-                    .addComponent(EmptyDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmptyDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ChangeManager)
+                    .addComponent(AllManagers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -640,28 +699,43 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(62, 62, 62))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        AllUsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Пользователи"
+                "ID Пользователя", "Имя пользователя", "Права пользователя"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -672,16 +746,24 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(AllUsersTable);
 
         jLabel1.setText("Пользователь");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        ChooseUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Пользователь 1", "Пользователь 2", "Пользователь 3" }));
-
         SetManager.setText("Сделать менеджером");
+        SetManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SetManagerActionPerformed(evt);
+            }
+        });
 
         DeleteManager.setText("Отменить статус менеджера");
+        DeleteManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteManagerActionPerformed(evt);
+            }
+        });
 
         CanselUsers.setText("Назад");
         CanselUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -695,37 +777,43 @@ public class MainWindow extends javax.swing.JFrame {
         UsersLayout.setHorizontalGroup(
             UsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(UsersLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(UsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UsersLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UsersLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChooseManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(UsersLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(UsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(SetManager, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DeleteManager, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ChooseUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ChooseClientUser, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(UsersLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))))
-                    .addGroup(UsersLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(CanselUsers)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, UsersLayout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(CanselUsers)))))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         UsersLayout.setVerticalGroup(
             UsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(UsersLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UsersLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(UsersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ChooseUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(ChooseClientUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SetManager)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DeleteManager)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ChooseManagerUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DeleteManager)
+                .addGap(18, 18, 18)
                 .addComponent(CanselUsers)
                 .addGap(34, 34, 34))
         );
@@ -852,9 +940,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(LevelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(LevelsLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 10, Short.MAX_VALUE)
                     .addComponent(MyCarWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 11, Short.MAX_VALUE)))
             .addGroup(LevelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(LevelsLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1065,6 +1153,48 @@ public class MainWindow extends javax.swing.JFrame {
         CI.ChangeTime(EmptyDate.getItemAt(EmptyDate.getSelectedIndex()));
     }//GEN-LAST:event_ChangeTimeBActionPerformed
 
+    private void SetManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetManagerActionPerformed
+        int id = 0;
+        for (int i = 0;i < 24; i++) {
+            if (AllUsersTable.getValueAt(i, 1).equals(ChooseClientUser.getItemAt(ChooseClientUser.getSelectedIndex()))) {
+                id = Integer.parseInt((String) AllCars.getValueAt(i,0));
+                break;
+            }
+        // id нужного нам пользователя
+        }
+        
+        CI.SetManager(id);
+        
+    }//GEN-LAST:event_SetManagerActionPerformed
+
+    private void DeleteManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteManagerActionPerformed
+        int id = 0;
+        for (int i = 0;i < 24; i++) {
+            if (AllUsersTable.getValueAt(i, 1).equals(ChooseManagerUser.getItemAt(ChooseManagerUser.getSelectedIndex()))) {
+                id = Integer.parseInt((String) AllCars.getValueAt(i,0));
+                break;
+            }
+        // id нужного нам пользователя
+        }
+        
+        CI.RemoveManager(id);
+        
+    }//GEN-LAST:event_DeleteManagerActionPerformed
+
+    private void ChangeManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeManagerActionPerformed
+        int id = 0;
+        for (int i = 0;i < 24; i++) {
+            if (AllUsersTable.getValueAt(i, 1).equals(ChooseManagerUser.getItemAt(ChooseManagerUser.getSelectedIndex()))) {
+                id = Integer.parseInt((String) AllCars.getValueAt(i,0));
+                break;
+            }
+        // id нужного нам пользователя
+        }
+        
+        CI.ChangeManager(id);
+        
+    }//GEN-LAST:event_ChangeManagerActionPerformed
+
     private void SetVisionButton(int root){
         switch (root){
             case 0: {
@@ -1078,6 +1208,10 @@ public class MainWindow extends javax.swing.JFrame {
                 EmptyDate.setVisible(false);
                 Help.setVisible(false);
                 Reserved.setVisible(false);
+                
+                AllManagers.setVisible(false);
+                ChangeManager.setVisible(false);
+                
                 break;
             }
             case 1: {
@@ -1098,6 +1232,9 @@ public class MainWindow extends javax.swing.JFrame {
                 Help.setVisible(true);
                 Reserved.setVisible(true);
                 
+                AllManagers.setVisible(false);
+                ChangeManager.setVisible(false);
+                
                 break;
             }
             case 2: {
@@ -1114,6 +1251,9 @@ public class MainWindow extends javax.swing.JFrame {
                 Help.setVisible(true);
                 Reserved.setVisible(true);
                 
+                AllManagers.setVisible(false);
+                ChangeManager.setVisible(false);
+                
                 break;
             }
             case 3: {
@@ -1129,6 +1269,9 @@ public class MainWindow extends javax.swing.JFrame {
                 EmptyDate.setVisible(true);
                 Help.setVisible(true);
                 Reserved.setVisible(true);
+                
+                AllManagers.setVisible(true);
+                ChangeManager.setVisible(true);
                 
                 break; 
             }
@@ -1176,7 +1319,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AllCars;
+    private javax.swing.JComboBox<String> AllManagers;
     private javax.swing.JButton AllUsers;
+    private javax.swing.JTable AllUsersTable;
     private javax.swing.JPanel Autorization;
     private javax.swing.JButton AutorizationButton;
     private javax.swing.JButton CanselAutorization;
@@ -1186,11 +1331,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton CanselUsers;
     private javax.swing.JLabel CarModelH;
     private javax.swing.JLabel CarNumbH;
+    private javax.swing.JButton ChangeManager;
     private javax.swing.JButton ChangeStatus;
     private javax.swing.JButton ChangeTimeB;
     private javax.swing.JTextArea Chat;
     private javax.swing.JPanel ChatPanel;
-    private javax.swing.JComboBox<String> ChooseUser;
+    private javax.swing.JComboBox<String> ChooseClientUser;
+    private javax.swing.JComboBox<String> ChooseManagerUser;
     private javax.swing.JComboBox<String> Clients;
     private javax.swing.JButton DeleteManager;
     private javax.swing.JLabel EmailH;
@@ -1238,6 +1385,5 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

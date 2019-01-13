@@ -149,9 +149,9 @@ public class Client implements ClientInterface{
     // Administrator
 
     @Override
-    public void ChangeManager(int id_rec, int id_manager) {
+    public void ChangeManager(int id_manager) {
         try {
-            CS.ChangeManager(id_rec, id_manager);
+            if (_id_rec == 0)CS.ChangeManager(id, id_manager);
         } catch (IOException ex) {
             System.out.println("Client.ChangeManager() ERROR");
         }
@@ -176,11 +176,12 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void OpenAllUsers() {
+    public String OpenAllUsers() {
         try {
-            CS.GetAllUsersInfo();
+            return CS.GetAllUsersInfo();
         } catch (IOException ex) {
             System.out.println("Client.OpenAllUsers() ERROR");
+            return "Connection Error";
         }
     }
 
