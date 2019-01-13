@@ -1,6 +1,10 @@
 package programbrain;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
 import org.postgresql.jdbc2.optional.ConnectionPool;
 
@@ -8,6 +12,11 @@ import java.sql.*;
 >>>>>>> Connect success, add interface to override procedures
 =======
 >>>>>>> Resolve conflicts with travis
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ab86a45152114cfbe2554dd4941509c16c48a16b
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 import java.io.PrintWriter;
 
 import static java.lang.System.out;
@@ -17,6 +26,10 @@ public class Procedure implements ProcedureInterface {
     public void ReadChat(int userId, PrintWriter refCursor) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
         
 =======
         /*Connection con = null;
@@ -61,8 +74,16 @@ public class Procedure implements ProcedureInterface {
         }*/
 >>>>>>> Connect success, add interface to override procedures
 =======
+<<<<<<< HEAD
         
 >>>>>>> Resolve conflicts with team reviewing
+=======
+        
+>>>>>>> Resolve conflicts with team reviewing
+=======
+        
+>>>>>>> ab86a45152114cfbe2554dd4941509c16c48a16b
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
     }
 
     @Override

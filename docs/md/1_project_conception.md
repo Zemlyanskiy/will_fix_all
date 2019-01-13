@@ -1,10 +1,18 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Resolve conflicts with team reviewing
 =======
 >>>>>>> Import changes in design strategy
+=======
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Resolve conflicts with team reviewing
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 ﻿<center>
     <h3 align="center"> Федеральное агентство по образованию РФ ГОУ </h3>
     <h3 align="center">ВПО Нижегородский государственный университет им. Н.И. Лобачевского</h3>
@@ -14,6 +22,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <h3 align="center">Факультет Вычислительной математики и кибернетики Кафедра Математического обеспечения ЭВМ </h3>
 <<<<<<< HEAD
 >>>>>>> Import changes in design strategy
@@ -25,6 +34,15 @@
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Import changes in design strategy
+=======
+    <h3 align="center">Факультет Вычислительной математики и кибернетики Кафедра Математического обеспечения ЭВМ </h3>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> Import changes in design strategy
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 
 <center>
 	<h3 align="center"> Федеральное агентство по образованию РФ ГОУ </h3>
@@ -33,9 +51,15 @@
 >>>>>>> Import changes in design strategy
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> Resolve conflicts with team reviewing
 =======
 >>>>>>> Import changes in design strategy
+=======
+=======
+>>>>>>> Resolve conflicts with team reviewing
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 <br>
 <br>
 <br>
@@ -655,8 +679,14 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
  ![4.1](images/4.1.PNG)
 
 =======
@@ -668,6 +698,9 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 >>>>>>> Import changes in design strategy
 =======
  
@@ -680,10 +713,16 @@ ID
 =======
  
 >>>>>>> Update 1_project_conception.md
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
  ![4.1](images/4.1.PNG)
 
 >>>>>>> Resolve conflicts with team reviewing
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -704,6 +743,9 @@ ID
 =======
  
 >>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 Архитектура разрабатываемой системы будет состоять из трех крупных взаимодействующих компонент.
 1. __Интерфейс (front-end)__ - предоставляет пользователю взаимодействие с программной системой посредством визуальных окон Windows. Взаимодействие с базой данных будет реализована при помощи связки процедур СУБД с клиентской частью.
 2. __Серверная часть (back-end)__  - реализует бизнес-логику работы с данными, взаимодействует с базой данных посредством SQL запросов и Object Relational Mapping (ORM), хранит в себе историю работы.
@@ -717,6 +759,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -731,6 +774,16 @@ ID
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+=======
+>>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
+<<<<<<< HEAD
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 ### 4.2. Стратегия технологического дизайна
 =======
 ### 4.2.	Стратегия технологического дизайна
@@ -740,14 +793,20 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
 ### 4.2. Стратегия технологического дизайна
 >>>>>>> Update 1_project_conception.md
 =======
 >>>>>>> Import changes in design strategy
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
 =======
 ### 4.2. Стратегия технологического дизайна
@@ -755,6 +814,7 @@ ID
 >>>>>>> Update 1_project_conception.md
 =======
 ### 4.2. Стратегия технологического дизайна
+<<<<<<< HEAD
 >>>>>>> Resolve conflicts with team reviewing
 =======
 ### 4.2. Стратегия технологического дизайна
@@ -770,12 +830,29 @@ ID
 >>>>>>> Update 1_project_conception.md
 >>>>>>> Update 1_project_conception.md
 =======
+=======
+### 4.2.	Стратегия технологического дизайна
+>>>>>>> Import changes in design strategy
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+### 4.2. Стратегия технологического дизайна
+>>>>>>> Update 1_project_conception.md
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
+=======
 >>>>>>> Import changes in design strategy
 =======
 =======
 ### 4.2. Стратегия технологического дизайна
 >>>>>>> Update 1_project_conception.md
 >>>>>>> Update 1_project_conception.md
+<<<<<<< HEAD
+=======
+=======
+### 4.2. Стратегия технологического дизайна
+>>>>>>> Resolve conflicts with team reviewing
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 <!--
 Разработка решения потребует использования определенных продуктов и технологий. Стратегия технологического дизайна (technical design strategy) описывает, какие технологии и продукты выбраны проектной группой в качестве средства реализации решения.
 Аргументировано опишите, какие технологические средства будут использованы в процессе работы над решением.
@@ -790,6 +867,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update 1_project_conception.md
 =======
@@ -800,15 +878,28 @@ ID
 =======
 >>>>>>> Resolve conflicts with team reviewing
 =======
+=======
+<<<<<<< HEAD
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
+=======
+>>>>>>> Import changes in design strategy
+=======
+>>>>>>> Update 1_project_conception.md
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Import changes in design strategy
 >>>>>>> Import changes in design strategy
 =======
 >>>>>>> Update 1_project_conception.md
 =======
+<<<<<<< HEAD
 =======
->>>>>>> Import changes in design strategy
->>>>>>> Import changes in design strategy
 =======
->>>>>>> Update 1_project_conception.md
+>>>>>>> Resolve conflicts with team reviewing
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 1. __Интерфейс (front-end):__
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений на языке __Java__ (фреймворк для создания графического интерфейса __JavaFX__).
 2. __Серверная часть (back-end):__
@@ -817,8 +908,14 @@ ID
 3. __База данных (database):__
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
 1. __Интерфейс (front-end):__  
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений под Windows: визуальных форм __WinForms__ и языка программирования __.Net C#__.  
@@ -829,6 +926,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Update 1_project_conception.md
 =======
@@ -840,6 +938,11 @@ ID
 >>>>>>> Update 1_project_conception.md
 >>>>>>> Update 1_project_conception.md
 =======
+=======
+=======
+>>>>>>> Update 1_project_conception.md
+=======
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 1. __Интерфейс (front-end):__
 - Клиентская часть приложения будет построена на основе стандартных средств разработки приложений под Windows: визуальных форм __WinForms__ и языка программирования __.Net C#__.
 2. __Серверная часть (back-end):__
@@ -848,6 +951,7 @@ ID
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Import changes in design strategy
 =======
@@ -862,6 +966,10 @@ ID
 =======
 >>>>>>> Import changes in design strategy
 >>>>>>> Import changes in design strategy
+=======
+=======
+>>>>>>> Import changes in design strategy
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 =======
 >>>>>>> Update 1_project_conception.md
 - Серверная часть приложения также будет реализована при помощи языка программирования __.Net C#__.
@@ -870,7 +978,13 @@ ID
 >>>>>>> Import changes in design strategy
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 >>>>>>> Resolve conflicts with team reviewing
 =======
 >>>>>>> Import changes in design strategy
+=======
+=======
+>>>>>>> Resolve conflicts with team reviewing
+>>>>>>> 7d8cebf8d66e9f1bea2ab8dba67c597fcd13f772
+>>>>>>> c1ac96495426dc97d8d8311df45c0bff7fb6bddc
 - В качестве управления  системой базы данных в реализации программного решения будет использоваться __СУБД PostgreSQL__ - свободная объектно-реляционная система управления базами данных, предоставляющая большой и гибкий функционал, которого будет более, чем достаточно для реализации проекта.
