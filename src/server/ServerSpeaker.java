@@ -58,7 +58,7 @@ public class ServerSpeaker extends Thread {
                         break;
                     }
                     case "GetCalendar": {
-                        answer = ServInt.SendCalendar();// скорее всего give calendar
+                        answer = ServInt.SendCalendar();
 
                         _dos.writeUTF(answer);
                         _dos.flush();

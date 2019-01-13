@@ -6,7 +6,7 @@ public interface ClientInterface {
     
     int GetStatus();
 
-    boolean Registration(String Login, String pass);
+    boolean Registration(String Login, String pass, String CarModel, String CarNumb);
 
     int Autorization(String Login, String pass);
 

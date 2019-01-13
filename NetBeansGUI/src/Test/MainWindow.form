@@ -979,38 +979,38 @@
                       <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="RegistrationStatus" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="LoginH" max="32767" attributes="0"/>
-                                      <Component id="PassH" max="32767" attributes="0"/>
-                                      <Component id="CarNumbH" max="32767" attributes="0"/>
-                                      <Component id="EmailH" max="32767" attributes="0"/>
-                                      <Component id="SentForRegistration" max="32767" attributes="0"/>
-                                      <Component id="CarModelH" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="LoginH" max="32767" attributes="0"/>
+                                  <Component id="PassH" max="32767" attributes="0"/>
+                                  <Component id="CarNumbH" max="32767" attributes="0"/>
+                                  <Component id="SentForRegistration" max="32767" attributes="0"/>
+                                  <Component id="CarModelH" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                      <Component id="CanselRegistration" min="-2" pref="130" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                          <Component id="CanselRegistration" min="-2" pref="130" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="RegLogin" max="32767" attributes="0"/>
-                                              <Component id="RegCarModel" max="32767" attributes="0"/>
-                                              <Component id="RegCarNumb" max="32767" attributes="0"/>
-                                              <Component id="RegEmail" max="32767" attributes="0"/>
-                                              <Component id="Password1" max="32767" attributes="0"/>
-                                              <Component id="Password2" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="RegLogin" max="32767" attributes="0"/>
+                                          <Component id="RegCarModel" max="32767" attributes="0"/>
+                                          <Component id="RegCarNumb" max="32767" attributes="0"/>
+                                          <Component id="Password1" max="32767" attributes="0"/>
+                                          <Component id="Password2" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace pref="216" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="RegistrationStatus" min="-2" pref="476" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1042,19 +1042,14 @@
                           <Component id="CarNumbH" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="RegCarNumb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="EmailH" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="RegEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="SentForRegistration" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CanselRegistration" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="RegistrationStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="179" max="32767" attributes="0"/>
+                      <EmptySpace pref="181" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1080,11 +1075,6 @@
                 <Property name="text" type="java.lang.String" value="&#x41d;&#x43e;&#x43c;&#x435;&#x440; &#x43c;&#x430;&#x448;&#x438;&#x43d;&#x44b;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="EmailH">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="e-mail"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="SentForRegistration">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x440;&#x435;&#x433;&#x438;&#x441;&#x442;&#x440;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;&#x441;&#x44f;"/>
@@ -1106,8 +1096,6 @@
             <Component class="javax.swing.JTextField" name="RegCarModel">
             </Component>
             <Component class="javax.swing.JTextField" name="RegCarNumb">
-            </Component>
-            <Component class="javax.swing.JTextField" name="RegEmail">
             </Component>
             <Component class="javax.swing.JTextField" name="RegistrationStatus">
               <Properties>

@@ -29,9 +29,9 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public boolean Registration(String Login, String pass) {
+    public boolean Registration(String Login, String pass, String CarModel, String CarNumb) {
         try {
-            return CS.Registration(Login, pass);
+            return CS.Registration(Login, pass, CarModel, CarNumb);
         } catch (IOException ex) {
             System.out.println("Error Client.Registration()");
             return false;

@@ -26,7 +26,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void SuccessRegistrationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.Registration("TrueLogin", "TruePassword");
+        boolean answer = speaker.Registration("TrueLogin", "TruePassword", "Lada", "e330ye");
 
         Assert.assertTrue(answer);
     }
@@ -34,7 +34,7 @@ public class ClientServerCommunicationTest {
     @Test
     public void FailRegistrationTest() throws IOException {
         ClientSpeaker speaker = new ClientSpeaker(host, port);
-        boolean answer = speaker.Registration("FalseLogin", "FalsePassword");
+        boolean answer = speaker.Registration("FalseLogin", "FalsePassword", "Lada", "e330ye");
 
         Assert.assertFalse(answer);
     }

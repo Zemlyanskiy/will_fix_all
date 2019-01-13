@@ -19,9 +19,9 @@ public class ClientSpeaker {
         _dos = new DataOutputStream(server.getOutputStream());
     }
 
-    public boolean Registration(String Login, String pass) throws IOException {
+    public boolean Registration(String Login, String pass, String CarModel, String CarNumb) throws IOException {
 
-        command = "Registration " + Login + ' ' + pass;
+        command = "Registration " + Login + ' ' + pass + ' ' + CarModel + ' ' + CarNumb;
         _dos.writeUTF(command);
         _dos.flush();
 

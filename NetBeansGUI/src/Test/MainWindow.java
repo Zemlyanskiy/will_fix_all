@@ -58,16 +58,15 @@ public class MainWindow extends javax.swing.JFrame {
         
         AllManagers.setVisible(false);
         ChangeManager.setVisible(false);
-        
-        Chat.setText(CI.OpenChat());
-        
+                
         calend = new Calendar(this);
         calend.start();
     }
 
     public void UpdateInfo(){
         UpdateCalendar();
-        UpdateChat();
+        
+        if (_root > 0) UpdateChat();
         if (_root > 1) UpdateOrders();
         if (_root > 2) UpdateUsers();
     }
@@ -130,27 +129,63 @@ public class MainWindow extends javax.swing.JFrame {
         i = 0;
     }
     
-    private void UpdateChat(){
+    private void UpdateChat() {
+        String chat = "";        
+        String answ = ""; 
+        StringTokenizer stok;
         if (IsLogin)
-            Chat.setText(CI.OpenChat());
+            answ = CI.OpenChat();
+             stok = new StringTokenizer(answ, " ");
+            
+            while (stok.hasMoreTokens()){
+                switch (stok.nextToken(" ")){
+                    case "0": {
+                       chat+= "Вы: ";
+                       break;
+                    }
+                    case "1": {
+                       chat+= "Менеджер: "; 
+                       break;
+                    }
+                    case "2": {
+                       chat+= "Администратор: "; 
+                       break;
+                    }
+                    default: break;
+                }
+                
+                chat += stok.nextToken("\n");
+                chat+= "\n";
+            }
+            
+            Chat.setText(chat);
     }
     
-    private void UpdateCalendar(){
+    private void UpdateCalendar() {
         
         String calendar = CI.UpdateCalendar();
         
         if (!flag){
             for (int i = 0; i < 7; i++) {
-                Table1.setValueAt((i+1) + " января", 0, i);
-                Table2.setValueAt((i+8) + " января", 0, i);
+                Table1.setValueAt((i+12) + " января", 0, i);
+                Table2.setValueAt((i+20) + " января", 0, i);
             }
             flag = true;
-        }
+        }       
         
-        if (IsLogin)
-            Chat.setText(CI.OpenChat());
+        for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 8; j++) {
+                    temp = "1" + j + ":00";
+                    Table1.setValueAt(temp, j+1, i);
+                    Table2.setValueAt(temp, j+1, i);
+                }
+            }
         
         EmptyDate.removeAllItems();
+        
+        for (int date = 12; date < 26; date++)
+            for (int hour = 10; hour < 18; hour++)
+                EmptyDate.addItem(hour + ":00 " + date + ".01");
         
         StringTokenizer stok = new StringTokenizer(calendar, " ");
         String date;
@@ -160,24 +195,24 @@ public class MainWindow extends javax.swing.JFrame {
             date = stok.nextToken();
             str = date.substring(2,4);
                         
-            if (Integer.parseInt(str) < 8 ) {
+            if (Integer.parseInt(str) < 19 ) {
                 newS = stok.nextToken();
                 if (newS.equalsIgnoreCase("0")) {
-                    Table1.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
-                    EmptyDate.addItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
+                    Table1.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 12);
                 }
                 if (newS.equalsIgnoreCase("1")) {
-                    Table1.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                    Table1.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 12);
+                    EmptyDate.removeItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
                 }
             }
             else {
                 newS = stok.nextToken();
                 if (newS.equalsIgnoreCase("0")) {
-                    Table2.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
-                    EmptyDate.addItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
+                    Table2.setValueAt((date.substring(0,2)) + ":00", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 19);
                 }
                 if (newS.equalsIgnoreCase("1")) {
-                    Table2.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 1);
+                    Table2.setValueAt("Reserved", Integer.parseInt(date.substring(0,2)) - 9, Integer.parseInt(date.substring(2,4))- 19);
+                    EmptyDate.removeItem((date.substring(0,2)) + ":00 " + date.substring(2,4) + ".01");
                 }
             }            
         }
@@ -250,13 +285,11 @@ public class MainWindow extends javax.swing.JFrame {
         PassH = new javax.swing.JLabel();
         CarModelH = new javax.swing.JLabel();
         CarNumbH = new javax.swing.JLabel();
-        EmailH = new javax.swing.JLabel();
         SentForRegistration = new javax.swing.JButton();
         CanselRegistration = new javax.swing.JButton();
         RegLogin = new javax.swing.JTextField();
         RegCarModel = new javax.swing.JTextField();
         RegCarNumb = new javax.swing.JTextField();
-        RegEmail = new javax.swing.JTextField();
         RegistrationStatus = new javax.swing.JTextField();
         Password1 = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
@@ -826,8 +859,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         CarNumbH.setText("Номер машины");
 
-        EmailH.setText("e-mail");
-
         SentForRegistration.setText("Зарегистрироваться");
         SentForRegistration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -855,30 +886,30 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(156, 156, 156)
                 .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(RegistrationStatus)
-                        .addGroup(RegistrationPanelLayout.createSequentialGroup()
-                            .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(LoginH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(PassH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CarNumbH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(EmailH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SentForRegistration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CarModelH, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(RegistrationPanelLayout.createSequentialGroup()
-                                    .addGap(51, 51, 51)
-                                    .addComponent(CanselRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(RegistrationPanelLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(RegLogin)
-                                        .addComponent(RegCarModel)
-                                        .addComponent(RegCarNumb)
-                                        .addComponent(RegEmail)
-                                        .addComponent(Password1)
-                                        .addComponent(Password2)))))))
+                    .addGroup(RegistrationPanelLayout.createSequentialGroup()
+                        .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LoginH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PassH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CarNumbH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SentForRegistration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CarModelH, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(RegistrationPanelLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(CanselRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(RegistrationPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RegLogin)
+                                    .addComponent(RegCarModel)
+                                    .addComponent(RegCarNumb)
+                                    .addComponent(Password1)
+                                    .addComponent(Password2))))))
                 .addContainerGap(216, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistrationPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(RegistrationStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegistrationPanelLayout.setVerticalGroup(
             RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -903,17 +934,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CarNumbH, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RegCarNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EmailH, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addGroup(RegistrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SentForRegistration)
                     .addComponent(CanselRegistration))
                 .addGap(18, 18, 18)
                 .addComponent(RegistrationStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         Levels.setLayer(TimeTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1093,10 +1120,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void SentForRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SentForRegistrationActionPerformed
         if (Password1.getText().equalsIgnoreCase(Password2.getText())) {
-            RegistrationStatus.setText("Отправляю");
-            boolean result = CI.Registration(RegLogin.getText(), Password1.getText());
-            if (result) RegistrationStatus.setText("Регистрация прошла успешно!");
-            else RegistrationStatus.setText("Ошибка регистрации. Попробуйте изменить пароль/логин");
+            if ((RegLogin.getText().length() < 80) && (Password1.getText().length() < 80) && (RegCarModel.getText().length() < 80) && (RegCarNumb.getText().length() < 80)) {
+                if ((RegLogin.getText().length() > 0) && (Password1.getText().length() > 0) && (RegCarModel.getText().length() > 0) && (RegCarNumb.getText().length() > 0) ) {                
+                    RegistrationStatus.setText("Отправляю");
+                    boolean result = CI.Registration(RegLogin.getText(), Password1.getText(), RegCarModel.getText(), RegCarNumb.getText());
+                    if (result) RegistrationStatus.setText("Регистрация прошла успешно!");
+                    else RegistrationStatus.setText("Ошибка регистрации. Попробуйте изменить пароль/логин");
+                }
+                else RegistrationStatus.setText("Пожалуйста, заполните все поля");
+            }
+            else RegistrationStatus.setText("Слишком длинные данные(больше 80 симв.)");
         }
         else RegistrationStatus.setText("Пароли не совпадают");
     }//GEN-LAST:event_SentForRegistrationActionPerformed
@@ -1340,7 +1373,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ChooseManagerUser;
     private javax.swing.JComboBox<String> Clients;
     private javax.swing.JButton DeleteManager;
-    private javax.swing.JLabel EmailH;
     private javax.swing.JComboBox<String> EmptyDate;
     private javax.swing.JComboBox<String> EmptyDate2;
     private javax.swing.JButton Exit;
@@ -1366,7 +1398,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPasswordField Password2;
     private javax.swing.JTextField RegCarModel;
     private javax.swing.JTextField RegCarNumb;
-    private javax.swing.JTextField RegEmail;
     private javax.swing.JTextField RegLogin;
     private javax.swing.JButton Registration;
     private javax.swing.JPanel RegistrationPanel;
