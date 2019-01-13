@@ -1,7 +1,6 @@
 package server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class Server implements ServerInterface{
     private String answer;
@@ -34,60 +33,184 @@ public class Server implements ServerInterface{
     };
 
     @Override
-    public String Registration(String Login, String pass) {
+    public String Registration(String Login, String pass, String car_model, String car_number) throws SQLException {
         // Must return true or false
         answer = "true";
+        Integer idorder = 3221;
+        final char dm = (char) 34;
+        Statement statement = db.createStatement();
+        ResultSet set = statement.executeQuery("SELECT " + dm + "LOGIN" + dm + " FROM " + dm + "Users" + dm);
+        while(set.next())
+        {
+            if(set.getString(1) == Login)
+            {
+                answer = "false";
+            }
+            idorder += 1;
+        }
+        if(answer == "true")
+        {
+            CallableStatement call = db.prepareCall("{call writeuser(?,?,?,?,?,?)}");
+            call.setInt(1, idorder);
+            call.setString(2, Login);
+            call.setString(3, pass);
+            call.setString(4, car_model);
+            call.setString(5, car_number);
+            call.setInt(6,1);
+            call.execute();
+        }
         return answer;
     }
 
     @Override
-    public String Autorization(String Login, String pass) {
+    public String Autorization(String Login, String pass) throws SQLException {
         // Must return true or false
         // ok. We have user's root in our table. We send this root to client
         // or we will user_id + root 
         // id_user + root
-        answer = "4 2";
+        boolean flag = true;
+        Integer idorder = 0;
+        String type = "";
+        final char dm = (char) 34;
+        Statement statement = db.createStatement();
+        ResultSet setLogin = statement.executeQuery("SELECT " + dm + "LOGIN" + dm + " FROM " + dm + "Users" + dm);
+        ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
+        while(setLogin.next() && setPass.next())
+        {
+            if(setLogin.getString(1) != Login || setPass.getString(1) != pass)
+            {
+                flag = false;
+            }
+        }
+        if(flag == true) {
+            CallableStatement call_idorder = db.prepareCall("{call readuseridorder(?)}");
+            call_idorder.setString(1, Login);
+            call_idorder.execute();
+            ResultSet set_idorder = call_idorder.getResultSet();
+            while (set_idorder.next()) {
+                idorder = set_idorder.getInt(1);
+            }
+            CallableStatement call_type = db.prepareCall("{call readuseridorder(?)}");
+            call_type.setInt(1, idorder);
+            call_type.execute();
+            ResultSet set_type = call_type.getResultSet();
+            while (set_type.next()) {
+                type = set_type.getString(1);
+            }
+            answer = idorder.toString() + " " + type;
+        }
+        else if(flag == false)
+        {
+            answer = "0 0";
+        }
         return answer;
     }
     
     @Override
-    public String SendCalendar() {
+    public String SendCalendar() throws SQLException {
         // Must return calendar status
         // hhddmm (status 0 1) hhddmm (status 0 1) .... all entries
         // 100101 - 10:00 01 january
-        answer = table;
+        String time_table = "";
+        final char dm = (char) 34;
+        Statement statement = db.createStatement();
+        ResultSet setTime = statement.executeQuery("SELECT " + dm + "TIME" + dm + " FROM " + dm + "Orders" + dm);
+        while (setTime.next())
+        {
+            time_table += setTime.getString(1) + " 1 ";
+        }
+        answer = time_table;
         return answer;
     }
         
     @Override
-    public String SendCarInfo(int id_rec) {
+    public String SendCarInfo(int id_rec) throws SQLException {
         //  Must return model number status
-        answer = "lada r367vo ready";
+        String car_info = "";
+        CallableStatement call_model = db.prepareCall("{call readusermodel(?)}");
+        call_model.setInt(1, id_rec);
+        call_model.execute();
+        ResultSet set_model = call_model.getResultSet();
+
+        CallableStatement call_number = db.prepareCall("{call readusernumber(?)}");
+        call_number.setInt(1, id_rec);
+        call_number.execute();
+        ResultSet set_number = call_number.getResultSet();
+
+        CallableStatement call_status = db.prepareCall("{call readorderstatus(?)}");
+        call_status.setInt(1, id_rec);
+        call_status.execute();
+        ResultSet set_status = call_status.getResultSet();
+
+        while (set_model.next() && set_number.next() && set_status.next()) {
+            car_info = set_model.getString(1) + " " + set_number.getString(1) + " " + set_status.getString(1);
+        }
+        answer = car_info;
         return answer;
     }
 
     @Override
-    public String SendRecordInfo(int id_rec) {
+    public String SendRecordInfo(int id_rec) throws SQLException {
         //  Must return model number status
-        answer = "toyota r367vo wait for diagnostic";
+        String car_info = "";
+        CallableStatement call_model = db.prepareCall("{call readusermodel(?)}");
+        call_model.setInt(1, id_rec);
+        call_model.execute();
+        ResultSet set_model = call_model.getResultSet();
+
+        CallableStatement call_number = db.prepareCall("{call readusernumber(?)}");
+        call_number.setInt(1, id_rec);
+        call_number.execute();
+        ResultSet set_number = call_number.getResultSet();
+
+        CallableStatement call_status = db.prepareCall("{call readorderstatus(?)}");
+        call_status.setInt(1, id_rec);
+        call_status.execute();
+        ResultSet set_status = call_status.getResultSet();
+
+        while (set_model.next() && set_number.next() && set_status.next()) {
+            car_info = set_model.getString(1) + " " + set_number.getString(1) + " " + set_status.getString(1);
+        }
+        answer = car_info;
         return answer;
     }
 
     @Override
-    public boolean ToBookATime(int id_rec, String time) {
+    public boolean ToBookATime(int id_rec, String time) throws SQLException {
         // Time is hhddmm  (101201 - 10:00 12 january)
         // Must return true or false
-        time += " 1";        
-        
+        boolean flag = true;
+        Integer managerID = 0;
+        final char dm = (char) 34;
+        Statement statement = db.createStatement();
+        ResultSet setManagerID = statement.executeQuery("SELECT " + dm + "IDORDER" + dm + " FROM " + dm + "Orders" + dm
+                                                            + " WHERE " + dm + "TYPE" + dm + " = 2");
+        while (setManagerID.next())
+        {
+            managerID = setManagerID.getInt(1);
+        }
+        time += " 1";
+        CallableStatement call = db.prepareCall("{call writeorder(?,?,?,?)}");
+        call.setInt(1, id_rec);
+        call.setString(2, "waiting");
+        call.setInt(3, managerID);
+        call.setString(4, time);
+        call.execute();
         table += " " + time;
         
-        return true;
+        return flag;
     }
 
     @Override
-    public String SendChat(int id_rec) {
-        answer = Chat;
-        
+    public String SendChat(int id_rec) throws SQLException {
+        answer = "";
+        Statement statement = db.createStatement();
+        final char dm = (char) 34;
+        ResultSet set = statement.executeQuery("SELECT " + dm + "MESSAGE" + dm + " FROM " + dm + "Chat" + dm);
+        while(set.next())
+        {
+            answer += set.getString(1);
+        }
         return answer;
     }
     

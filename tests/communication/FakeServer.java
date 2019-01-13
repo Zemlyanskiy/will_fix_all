@@ -8,7 +8,7 @@ public class FakeServer implements ServerInterface {
     public FakeServer(){};
 
     @Override
-    public String Registration(String Login, String pass) {
+    public String Registration(String Login, String pass, String car_model, String car_number) {
         if (Login.equals("TrueLogin") && pass.equals("TruePassword"))
             answer = "true";
         else
