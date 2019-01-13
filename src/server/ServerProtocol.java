@@ -15,7 +15,7 @@ public class ServerProtocol extends Thread {
 
     public ServerProtocol(int port, ServerInterface _sinterface) throws IOException{
         ss = new ServerSocket(port);
-        sinterface = new Server();
+        sinterface = _sinterface;
     }
 
     @Override
