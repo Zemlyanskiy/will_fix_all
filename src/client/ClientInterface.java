@@ -28,7 +28,7 @@ public interface ClientInterface {
 
     void ChangeStatus(String status);
 
-    void ChangeTime(int time, int id_rec);
+    void ChangeTime(String time);
 
     // Administrator
 

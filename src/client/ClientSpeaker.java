@@ -122,9 +122,10 @@ public class ClientSpeaker {
         return Boolean.parseBoolean(_dis.readUTF());
     }
 
-    public boolean ChangeTime(int id_rec, int time ) throws IOException {
-
-        command = "ChangeTime " + id_rec + ' ' + time;
+    public boolean ChangeTime(int id_rec, String time ) throws IOException {
+        
+        command = "ChangeTime " + id_rec + ' ' + time.substring(0, 2) + time.substring(6, 8) + time.substring(9, 11);
+        
         _dos.writeUTF(command);
         _dos.flush();
         // true false

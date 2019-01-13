@@ -119,9 +119,10 @@ public class Server implements ServerInterface{
     }
 
     @Override
-    public String ChangeTime(int id_rec, int time) {
+    public String ChangeTime( int id_rec, String time ) {
         // Must return true or false
         answer = "true";
+        System.out.println(time);
         return answer;
     }
 

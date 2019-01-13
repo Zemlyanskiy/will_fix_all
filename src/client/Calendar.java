@@ -22,7 +22,7 @@ public class Calendar extends Thread{
         while (true) {
             _window.UpdateInfo();
             try {
-                sleep(2500);
+                sleep(5000);
             } catch (InterruptedException ex) {
                 System.out.println("HE YCHYL!");
             }

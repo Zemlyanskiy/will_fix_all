@@ -127,9 +127,15 @@ public class ServerSpeaker extends Thread {
                     }
 
                     case "ChangeTime": {
+                        
+                        System.out.println(stok.countTokens());
+                        
                         int id_rec = Integer.parseInt(stok.nextToken());
-                        int time = Integer.parseInt(stok.nextToken());
-                        answer = ServInt.ChangeTime(id_rec, time);
+                        data = stok.nextToken();
+                        
+                        System.out.println(data + " " + id_rec);
+                        
+                        answer = ServInt.ChangeTime(id_rec, data);
 
                         _dos.writeUTF(answer);
                         _dos.flush();

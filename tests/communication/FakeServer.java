@@ -102,9 +102,10 @@ public class FakeServer implements ServerInterface {
         return answer;
     }
 
+
     @Override
-    public String ChangeTime(int id_rec, int time) {
-        if (id_rec == -1 || time == 100000 )
+    public String ChangeTime(int id_rec, String time) {
+        if (id_rec == -1 || time.equalsIgnoreCase("100000" ) )
             answer = "false";
         else
             answer = "true";

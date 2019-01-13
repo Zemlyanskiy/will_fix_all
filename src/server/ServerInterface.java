@@ -24,7 +24,7 @@ public interface ServerInterface {
 
     String ChangeStatus(int id_rec, String status);
 
-    String ChangeTime(int time, int id_rec);
+    String ChangeTime( int id_rec, String time);
     
     // AdminInterface
 

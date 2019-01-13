@@ -141,6 +141,7 @@ public class MainWindow extends javax.swing.JFrame {
             }            
         }
         if (EmptyDate.getItemCount() == 0) EmptyDate.addItem("Свободного времени нет");
+        EmptyDate2.setModel(EmptyDate.getModel());       
     }
         
     /**
@@ -185,6 +186,7 @@ public class MainWindow extends javax.swing.JFrame {
         ChangeStatus = new javax.swing.JButton();
         NewStatusH = new javax.swing.JLabel();
         NewOrderStatus = new javax.swing.JTextField();
+        EmptyDate2 = new javax.swing.JComboBox<>();
         Orders = new javax.swing.JPanel();
         Clients = new javax.swing.JComboBox<>();
         CanselOrders = new javax.swing.JButton();
@@ -281,7 +283,6 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Table1.setCellSelectionEnabled(false);
         Table1.setEnabled(false);
         Table1.setFocusable(false);
         Table1.getTableHeader().setReorderingAllowed(false);
@@ -317,7 +318,6 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Table2.setCellSelectionEnabled(false);
         Table2.setFocusable(false);
         Table2.getTableHeader().setReorderingAllowed(false);
 
@@ -461,8 +461,6 @@ public class MainWindow extends javax.swing.JFrame {
         Chat.setFocusable(false);
         jScrollPane2.setViewportView(Chat);
 
-        Message.setText("Message");
-
         SendMessage.setText("Отправить");
         SendMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -474,14 +472,13 @@ public class MainWindow extends javax.swing.JFrame {
         ChatPanel.setLayout(ChatPanelLayout);
         ChatPanelLayout.setHorizontalGroup(
             ChatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ChatPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChatPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ChatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ChatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2)
-                    .addGroup(ChatPanelLayout.createSequentialGroup()
-                        .addComponent(Message)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SendMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Message, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SendMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ChatPanelLayout.setVerticalGroup(
@@ -497,6 +494,11 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         ChangeTimeB.setText("Изменить время заказа");
+        ChangeTimeB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeTimeBActionPerformed(evt);
+            }
+        });
 
         ChangeStatus.setText("Изменить статус");
         ChangeStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -513,53 +515,53 @@ public class MainWindow extends javax.swing.JFrame {
         MyCarWindow.setLayout(MyCarWindowLayout);
         MyCarWindowLayout.setHorizontalGroup(
             MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ChatPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(MyCarWindowLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(199, Short.MAX_VALUE)
                 .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MyCarWindowLayout.createSequentialGroup()
-                        .addComponent(ChangeTimeB)
-                        .addGap(18, 18, 18)
-                        .addComponent(NewStatusH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addComponent(ChatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CanselMyCar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(CanselMyCar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
-                        .addComponent(MyCarModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(MyCarWindowLayout.createSequentialGroup()
+                                .addComponent(EmptyDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ChangeTimeB))
+                            .addGroup(MyCarWindowLayout.createSequentialGroup()
+                                .addComponent(NewStatusH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 8, 8)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MyCarWindowLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(MyCarModel, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         MyCarWindowLayout.setVerticalGroup(
             MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MyCarWindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CanselMyCar)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MyCarWindowLayout.createSequentialGroup()
-                        .addComponent(MyCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(MyCarWindowLayout.createSequentialGroup()
-                                .addComponent(ChatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 40, Short.MAX_VALUE))
-                            .addGroup(MyCarWindowLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ChangeTimeB)
-                                    .addComponent(NewStatusH)
-                                    .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ChangeStatus))
-                                .addContainerGap())))
-                    .addGroup(MyCarWindowLayout.createSequentialGroup()
-                        .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(MyCarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MyCarModel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ChatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChangeStatus)
+                    .addComponent(NewOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NewStatusH))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(MyCarWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChangeTimeB)
+                    .addComponent(EmptyDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         CanselOrders.setText("Назад");
@@ -968,7 +970,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AllUsersActionPerformed
 
     private void MyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCarActionPerformed
-        
+        EmptyDate2.setVisible(false);
         if (_root > 1) {            
                 ChangeTimeB.setVisible(false);
                 ChangeStatus.setVisible(false);
@@ -1012,6 +1014,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_SentForRegistrationActionPerformed
 
     private void CanselMyCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanselMyCarActionPerformed
+        Message.setText("");
+        EmptyDate2.setVisible(true);
         
         if (_root > 1) {            
                 ChangeTimeB.setVisible(true);
@@ -1028,6 +1032,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (CI.SendMessage(Message.getText())) {
             answ = CI.OpenChat();        
             Chat.setText(answ);
+            Message.setText("");
         }
     }//GEN-LAST:event_SendMessageActionPerformed
 
@@ -1048,13 +1053,17 @@ public class MainWindow extends javax.swing.JFrame {
         StringTokenizer stok = new StringTokenizer(answ, " ");
         MyCarModel.setText(stok.nextToken() + " " + stok.nextToken());
         MyCarStatus.setText(stok.nextToken("\r?\n"));
-                
+        EmptyDate2.setVisible(true);
         Orders.setVisible(false);        
     }//GEN-LAST:event_OpenOrderActionPerformed
 
     private void ChangeStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeStatusActionPerformed
         CI.ChangeStatus(NewOrderStatus.getText());
     }//GEN-LAST:event_ChangeStatusActionPerformed
+
+    private void ChangeTimeBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeTimeBActionPerformed
+        CI.ChangeTime(EmptyDate.getItemAt(EmptyDate.getSelectedIndex()));
+    }//GEN-LAST:event_ChangeTimeBActionPerformed
 
     private void SetVisionButton(int root){
         switch (root){
@@ -1186,6 +1195,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton DeleteManager;
     private javax.swing.JLabel EmailH;
     private javax.swing.JComboBox<String> EmptyDate;
+    private javax.swing.JComboBox<String> EmptyDate2;
     private javax.swing.JButton Exit;
     private javax.swing.JLabel Help;
     private javax.swing.JLayeredPane Levels;

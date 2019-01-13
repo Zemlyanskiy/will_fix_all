@@ -138,9 +138,9 @@ public class Client implements ClientInterface{
     }
 
     @Override
-    public void ChangeTime(int time, int id_rec) {
+    public void ChangeTime(String time) {
         try {
-            CS.ChangeTime(id_rec, time);
+            CS.ChangeTime(_id_rec, time);
         } catch (IOException ex) {
             System.out.println("Client.ChangeTime() ERROR");
         }
