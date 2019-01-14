@@ -237,7 +237,7 @@ public class Server implements ServerInterface{
     }
     
     @Override
-    public boolean AddMessage(String message, int id_rec, int root) throws SQLException {
+    public boolean c(String message, int id_rec, int root) throws SQLException {
         Integer i = 0;
         if ((root < 1) || (root > 3)) return false;
         switch(root){
