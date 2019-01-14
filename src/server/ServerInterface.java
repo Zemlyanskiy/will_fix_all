@@ -18,7 +18,7 @@ public interface ServerInterface {
     
     String SendChat(int id_rec) throws SQLException;
     
-    boolean AddMessage(String message, int id_rec, int root);
+    boolean AddMessage(String message, int id_rec, int root) throws SQLException;
     
     // Manager
 
