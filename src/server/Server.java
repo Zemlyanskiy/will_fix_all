@@ -335,16 +335,56 @@ public class Server implements ServerInterface{
     }
 
     @Override
-    public String ChangeStatus(int id_rec, String status) {
+    public String ChangeStatus(int id_rec, String status, int manager_id, String time) throws SQLException {
         // Must return true or false
         answer = "true";
+
+        CallableStatement call_delete_status = db.prepareCall("{call deleteorder(?)}");
+        call_delete_status.setInt(1, id_rec);
+        call_delete_status.execute();
+        if(!call_delete_status.execute())
+        {
+            answer = "false";
+        }
+
+        CallableStatement call_write_status = db.prepareCall("{call writeorder(?)}");
+        call_write_status.setInt(1, id_rec);
+        call_write_status.setString(2, status);
+        call_write_status.setInt(3, manager_id);
+        call_write_status.setString(4, time);
+        call_write_status.execute();
+        if(!call_write_status.execute())
+        {
+            answer = "false";
+        }
+
         return answer;
     }
 
     @Override
-    public String ChangeTime( int id_rec, String time ) {
+    public String ChangeTime( int id_rec, String status, int manager_id, String time ) throws SQLException {
         // Must return true or false
         answer = "true";
+
+        CallableStatement call_delete_status = db.prepareCall("{call deleteorder(?)}");
+        call_delete_status.setInt(1, id_rec);
+        call_delete_status.execute();
+        if(!call_delete_status.execute())
+        {
+            answer = "false";
+        }
+
+        CallableStatement call_write_status = db.prepareCall("{call writeorder(?)}");
+        call_write_status.setInt(1, id_rec);
+        call_write_status.setString(2, status);
+        call_write_status.setInt(3, manager_id);
+        call_write_status.setString(4, time);
+        call_write_status.execute();
+        if(!call_write_status.execute())
+        {
+            answer = "false";
+        }
+
         System.out.println(time);
         return answer;
     }
@@ -352,10 +392,30 @@ public class Server implements ServerInterface{
     // Admin Interface
 
     @Override
-    public String ChangeManager(int id_rec, int id_manager) {
+    public String ChangeManager(int id_rec, String status, int manager_id, String time) throws SQLException {
         // Must return true or false
-        System.out.println("For order " + id_rec + " this manager " + id_manager + " is main now");
+        System.out.println("For order " + id_rec + " this manager " + manager_id + " is main now");
         answer = "true";
+
+        CallableStatement call_delete_status = db.prepareCall("{call deleteorder(?)}");
+        call_delete_status.setInt(1, id_rec);
+        call_delete_status.execute();
+        if(!call_delete_status.execute())
+        {
+            answer = "false";
+        }
+
+        CallableStatement call_write_status = db.prepareCall("{call writeorder(?)}");
+        call_write_status.setInt(1, id_rec);
+        call_write_status.setString(2, status);
+        call_write_status.setInt(3, manager_id);
+        call_write_status.setString(4, time);
+        call_write_status.execute();
+        if(!call_write_status.execute())
+        {
+            answer = "false";
+        }
+
         return answer;
     }
 
