@@ -538,6 +538,12 @@ public class MainWindow extends javax.swing.JFrame {
         Chat.setFocusable(false);
         jScrollPane2.setViewportView(Chat);
 
+        Message.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MessageKeyPressed(evt);
+            }
+        });
+
         SendMessage.setText("Отправить");
         SendMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1227,6 +1233,11 @@ public class MainWindow extends javax.swing.JFrame {
         CI.ChangeManager(id);
         
     }//GEN-LAST:event_ChangeManagerActionPerformed
+
+    private void MessageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MessageKeyPressed
+        if (Message.getText().length() >= 78) SendMessage.setEnabled(false);
+        if (Message.getText().length() < 78) SendMessage.setEnabled(true);
+    }//GEN-LAST:event_MessageKeyPressed
 
     private void SetVisionButton(int root){
         switch (root){
