@@ -78,7 +78,7 @@ public class Server implements ServerInterface{
         while(setLogin.next())
         {
             String strdb = setLogin.getString(1);
-            if(strdb.equalsIgnoreCase(Login) /*|| setPass.getString(1) != pass*/)
+            if(strdb.equalsIgnoreCase(Login))
             {
                 flagLogin = true;
             }
@@ -194,18 +194,17 @@ public class Server implements ServerInterface{
         return answer;
     }
 
-    @Override
-    public boolean ToBookATime(int id_rec, String time) throws SQLException {
-        // Time is hhddmm  (101201 - 10:00 12 january)
-        // Must return true or false
+    @Override 
+public boolean ToBookATime(int id_rec, String time) throws SQLException {
+// Time is hhddmm (101201 - 10:00 12 january) 
+// Must return true or false 
         boolean flag = true;
         Integer managerID = 0;
         final char dm = (char) 34;
         Statement statement = db.createStatement();
         ResultSet setManagerID = statement.executeQuery("SELECT " + dm + "ID_ORDER" + dm + " FROM " + dm + "Users" + dm
-                                                            + " WHERE " + dm + "TYPE" + dm + " = 2");
-        while (setManagerID.next())
-        {
+                + " WHERE " + dm + "TYPE" + dm + " = 2");
+        while (setManagerID.next()) {
             managerID = setManagerID.getInt(1);
         }
         time += " 1";
@@ -216,7 +215,7 @@ public class Server implements ServerInterface{
         call.setString(4, time);
         call.execute();
         table += " " + time;
-        
+
         return flag;
     }
 
