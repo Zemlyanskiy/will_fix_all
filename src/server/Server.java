@@ -74,10 +74,17 @@ public class Server implements ServerInterface{
         final char dm = (char) 34;
         Statement statement = db.createStatement();
         ResultSet setLogin = statement.executeQuery("SELECT " + dm + "LOGIN" + dm + " FROM " + dm + "Users" + dm);
+<<<<<<< HEAD
         //ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
         while(setLogin.next()/* && setPass.next()*/)
         {
             if(setLogin.getString(1).equalsIgnoreCase(Login) /*|| setPass.getString(1) != pass*/)
+=======
+        ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
+        while(setLogin.next() && setPass.next())
+        {
+            if(setLogin.getString(1) != Login || setPass.getString(1) != pass)
+>>>>>>> fa33e5622b0d6148ddf0a03a862983c851d46d3e
             {
                 flag = false;
             }
@@ -98,7 +105,10 @@ public class Server implements ServerInterface{
                 type = set_type.getString(1);
             }
             answer = idorder.toString() + " " + type;
+<<<<<<< HEAD
             System.out.println(answer);
+=======
+>>>>>>> fa33e5622b0d6148ddf0a03a862983c851d46d3e
         }
         else if(flag == false)
         {
