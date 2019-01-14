@@ -68,28 +68,33 @@ public class Server implements ServerInterface{
         // ok. We have user's root in our table. We send this root to client
         // or we will user_id + root 
         // id_user + root
-        boolean flag = true;
+        boolean flagLogin = false;
+        boolean flagPass = false;
         Integer idorder = 0;
-        String type = "";
+        Integer type = 0;
         final char dm = (char) 34;
         Statement statement = db.createStatement();
         ResultSet setLogin = statement.executeQuery("SELECT " + dm + "LOGIN" + dm + " FROM " + dm + "Users" + dm);
-<<<<<<< HEAD
-        //ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
-        while(setLogin.next()/* && setPass.next()*/)
+        while(setLogin.next())
         {
-            if(setLogin.getString(1).equalsIgnoreCase(Login) /*|| setPass.getString(1) != pass*/)
-=======
-        ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
-        while(setLogin.next() && setPass.next())
-        {
-            if(setLogin.getString(1) != Login || setPass.getString(1) != pass)
->>>>>>> fa33e5622b0d6148ddf0a03a862983c851d46d3e
+            String strdb = setLogin.getString(1);
+            if(strdb.equalsIgnoreCase(Login) /*|| setPass.getString(1) != pass*/)
             {
-                flag = false;
+                flagLogin = true;
             }
         }
-        if(flag == true) {
+        setLogin.close();
+        ResultSet setPass = statement.executeQuery("SELECT " + dm + "PASSWORD" + dm + " FROM " + dm + "Users" + dm);
+        while(setPass.next())
+        {
+            String strdb = setPass.getString(1);
+            if(strdb.equalsIgnoreCase(pass))
+            {
+                flagPass = true;
+            }
+        }
+        setPass.close();
+        if(flagLogin == true && flagPass == true) {
             CallableStatement call_idorder = db.prepareCall("{call readuseridorder(?)}");
             call_idorder.setString(1, Login);
             call_idorder.execute();
@@ -97,20 +102,17 @@ public class Server implements ServerInterface{
             while (set_idorder.next()) {
                 idorder = set_idorder.getInt(1);
             }
-            CallableStatement call_type = db.prepareCall("{call readuseridorder(?)}");
+            CallableStatement call_type = db.prepareCall("{call readusertype(?)}");
             call_type.setInt(1, idorder);
             call_type.execute();
             ResultSet set_type = call_type.getResultSet();
             while (set_type.next()) {
-                type = set_type.getString(1);
+                type = set_type.getInt(1);
             }
-            answer = idorder.toString() + " " + type;
-<<<<<<< HEAD
+            answer = idorder.toString() + " " + type.toString();
             System.out.println(answer);
-=======
->>>>>>> fa33e5622b0d6148ddf0a03a862983c851d46d3e
         }
-        else if(flag == false)
+        else if(flagLogin == false || flagPass == false)
         {
             answer = "0 0";
         }
