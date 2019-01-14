@@ -190,6 +190,9 @@ public class Server implements ServerInterface{
                 }
             }
         }
+        set_model.close();
+        set_number.close();
+        set_status.close();
         answer = car_info;
         return answer;
     }
@@ -208,14 +211,13 @@ public class Server implements ServerInterface{
         {
             managerID = setManagerID.getInt(1);
         }
-        time += " 1";
         CallableStatement call = db.prepareCall("{call writeorder(?,?,?,?)}");
         call.setInt(1, id_rec);
         call.setString(2, "waiting");
         call.setInt(3, managerID);
         call.setString(4, time);
         call.execute();
-        table += " " + time;
+        table += " ";
         
         return flag;
     }
@@ -281,9 +283,54 @@ public class Server implements ServerInterface{
     // Manager
 
     @Override
-    public String SendClientsInfoToManager(int id_manager) {
+    public String SendClientsInfoToManager(int id_manager) throws SQLException {
         // Must return orderid login CarModel CarNumber, orderid login CarModel CarNumber
-        answer = "1 username1 Lada e228ye 2 username2 Toyota e007uu 3 username3 Lada e228ye 4 username4 Toyota e007uu 5 username5 Lada e228ye 6 username6 Toyota e007uu";
+        Integer idorder = 0;
+        final char dm = (char) 34;
+        answer = "";
+        String login = "";
+        String model = "";
+        String number = "";
+
+        Statement stateorders = db.createStatement();
+        ResultSet setorders = stateorders.executeQuery("SELECT " + dm + "IDORDER" + dm + " FROM " + dm + "Orders" + dm + " WHERE  " + dm + "MANAGERID" + dm + " = " + id_manager);
+
+        while(setorders.next())
+        {
+            idorder = setorders.getInt(1);
+
+            CallableStatement call_login = db.prepareCall("{call readuserlogin(?)}");
+            call_login.setInt(1, idorder);
+            call_login.execute();
+            ResultSet set_login = call_login.getResultSet();
+
+            CallableStatement call_model = db.prepareCall("{call readusermodel(?)}");
+            call_model.setInt(1, idorder);
+            call_model.execute();
+            ResultSet set_model = call_model.getResultSet();
+
+            CallableStatement call_number = db.prepareCall("{call readusernumber(?)}");
+            call_number.setInt(1, idorder);
+            call_number.execute();
+            ResultSet set_number = call_number.getResultSet();
+
+            while (set_login.next())
+            {
+                while (set_model.next())
+                {
+                    while (set_number.next())
+                    {
+                        login = set_login.getString(1);
+                        model = set_model.getString(1);
+                        number = set_number.getString(1);
+                        answer += idorder.toString() + login  + model + number + ", ";
+                    }
+                }
+            }
+        }
+        setorders.close();
+
+        //answer = "1 username1 Lada e228ye 2 username2 Toyota e007uu 3 username3 Lada e228ye 4 username4 Toyota e007uu 5 username5 Lada e228ye 6 username6 Toyota e007uu";
         return answer;
     }
 

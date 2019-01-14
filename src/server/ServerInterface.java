@@ -22,7 +22,7 @@ public interface ServerInterface {
     
     // Manager
 
-    String SendClientsInfoToManager(int id_manager);
+    String SendClientsInfoToManager(int id_manager) throws SQLException;
 
     String ChangeStatus(int id_rec, String status);
 
