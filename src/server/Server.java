@@ -181,8 +181,14 @@ public class Server implements ServerInterface{
         call_status.execute();
         ResultSet set_status = call_status.getResultSet();
 
-        while (set_model.next() && set_number.next() && set_status.next()) {
-            car_info = set_model.getString(1) + " " + set_number.getString(1) + " " + set_status.getString(1);
+        while (set_model.next()) {
+            while (set_number.next())
+            {
+                while (set_status.next())
+                {
+                    car_info = set_model.getString(1) + " " + set_number.getString(1) + " " + set_status.getString(1);
+                }
+            }
         }
         answer = car_info;
         return answer;
@@ -196,7 +202,7 @@ public class Server implements ServerInterface{
         Integer managerID = 0;
         final char dm = (char) 34;
         Statement statement = db.createStatement();
-        ResultSet setManagerID = statement.executeQuery("SELECT " + dm + "IDORDER" + dm + " FROM " + dm + "Orders" + dm
+        ResultSet setManagerID = statement.executeQuery("SELECT " + dm + "ID_ORDER" + dm + " FROM " + dm + "Users" + dm
                                                             + " WHERE " + dm + "TYPE" + dm + " = 2");
         while (setManagerID.next())
         {
@@ -217,30 +223,52 @@ public class Server implements ServerInterface{
     @Override
     public String SendChat(int id_rec) throws SQLException {
         answer = "";
+        String mes = "";
         Statement statement = db.createStatement();
         final char dm = (char) 34;
         ResultSet set = statement.executeQuery("SELECT " + dm + "MESSAGE" + dm + " FROM " + dm + "Chat" + dm);
         while(set.next())
         {
-            answer += set.getString(1);
+            mes += set.getString(1);
+            answer += mes;
         }
+        set.close();
         return answer;
     }
     
     @Override
-    public boolean AddMessage(String message, int id_rec, int root) {
+    public boolean AddMessage(String message, int id_rec, int root) throws SQLException {
+        Integer i = 0;
         if ((root < 1) || (root > 3)) return false;
         switch(root){
             case 1: {
-              Chat+= "0";  
-              break;
+                i+=1;
+                CallableStatement call = db.prepareCall("{call writeorder(?,?,?,?)}");
+                call.setInt(1, id_rec);
+                call.setInt(2, i);
+                call.setString(3, message);
+                call.execute();
+                Chat+= "0 " + message;
+                break;
             }
             case 2: {
-               Chat+= "1";
-               break;
+                i+=1;
+                CallableStatement call = db.prepareCall("{call writeorder(?,?,?,?)}");
+                call.setInt(1, id_rec);
+                call.setInt(2, i);
+                call.setString(3, message);
+                call.execute();
+                Chat+= "1 " + message;
+                break;
             }
             case 3: {
-                Chat+= "2";
+                i+=1;
+                CallableStatement call = db.prepareCall("{call writeorder(?,?,?,?)}");
+                call.setInt(1, id_rec);
+                call.setInt(2, i);
+                call.setString(3, message);
+                call.execute();
+                Chat+= "2 " + message;
                 break;
             }
             default: break;
